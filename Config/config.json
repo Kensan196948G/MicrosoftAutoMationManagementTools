@@ -1,0 +1,19 @@
+{
+  "TenantId": "a7232f7a-a9e5-4f71-9372-dc8b1c6645ea",
+  "ClientId": "22e5d6e4-805f-4516-af09-ff09c7c224c4",
+  "LogPath": "Logs/RunLogs",
+  "ErrorLogPath": "Logs/ErrorLogs",
+  "AuditLogPath": "Logs/AuditLogs",
+  "LogLevel": "Normal",
+  "DefaultScopes": [
+    "Files.Read.All",
+    "Files.ReadWrite.All",
+    "Sites.Read.All",
+    "Sites.ReadWrite.All",
+    "User.Read.All",
+    "Directory.Read.All",
+    "Group.Read.All",
+	"Reports.Read.All" 
+  ],
+  "AdminUPN": "admin@miraiconst.onmicrosoft.com"
+}
