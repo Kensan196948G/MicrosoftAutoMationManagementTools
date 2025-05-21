@@ -4,6 +4,7 @@
 本ツールは、Microsoft 365, Entra ID (旧 Azure AD), Exchange Online の管理業務を自動化し、ITSMプラクティスとISO27001/27002の統制要件に準拠することを目的としています。PowerShellベースで開発されており、各種管理タスクの効率化とセキュリティ強化に貢献します。
 
 ## 主要機能
+- **CLIメニュー:** PowerShellプロンプト上で対話的に操作できるCLIメニューを提供し、各機能へのアクセスを容易にします。
 - **Coreモジュール:** 認証、ログ管理、エラー処理などの基盤機能を提供します。
 - **機能モジュール:** ユーザー管理、グループ管理、Exchange Online管理、OneDrive/Teams管理、ライセンス管理など、多岐にわたる自動化機能を提供します。
 - **レポート・通知機能:** 定期的なレポート作成と異常検知時の通知機能を備え、運用状況の可視化と迅速な対応を支援します。
@@ -52,7 +53,7 @@ MicrosoftAutoMationManagementTools/
 │
 ├── 📂 Config/                      # 設定ファイル
 │   ├── config.json
-│   └── secrets.enc.json            # ※暗号化された認証情報ファイル
+│   └── secrets.enc.json            # ※現在利用していません。ClientSecretは実行時に入力します。
 │
 ├── 📂 Docs/                        # 各種仕様書・手順書
 │   ├── ITSM_M365_Tool_Spec.md
@@ -70,15 +71,17 @@ MicrosoftAutoMationManagementTools/
 │   ├── LicenseOptimizer.ps1
 │   └── BackupConfigs.ps1
 │
+├── MainCliMenu.ps1                # PowerShellプロンプト用CLIメニュー
 └── README.md                      # 全体概要と導入手順リンク
-
+ 
 ## 導入手順
 1. PowerShell v7.2+のインストール
 2. 必要なPowerShellモジュールのインストール (Microsoft.Graph, ExchangeOnlineManagement, MicrosoftTeams)
 3. Entra IDでのアプリケーション登録とAPI権限構成
-4. `Config/config.json`および`Config/secrets.enc.json`の設定
-5. 環境に合わせたタスクスケジューラの設定
-
+4. `Config/config.json`の設定
+5. ツール実行時、Client Secretはプロンプトで入力してください。(secrets.enc.jsonは現在使用していません。)
+6. 環境に合わせたタスクスケジューラの設定
+ 
 詳細な導入手順は `Docs/Installation_Guide.pdf` または `Docs/Operation_Guide.md` を参照してください。
 
 ## 貢献
