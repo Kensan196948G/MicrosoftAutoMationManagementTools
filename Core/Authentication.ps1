@@ -7,6 +7,16 @@ class AuthToken {
     [string]$Resource
 }
 
+class WinRMSessionOptions {
+    [bool]$UseSSL = $true
+    [string]$Authentication = "Kerberos"
+    [int]$Port = 5986
+    [int]$OperationTimeout = 30000
+    [int]$SkipCACheck = $false
+    [int]$SkipCNCheck = $false
+    [int]$SkipRevocationCheck = $false
+}
+
 <#
 .SYNOPSIS
 統一認証モジュール - Microsoft 365とADの認証を統合
@@ -97,15 +107,27 @@ function Get-M365GraphToken {
 function Get-ADAuthToken {
     param(
         [Parameter(Mandatory=$true)]
-        [pscredential]$Credential
+        [pscredential]$Credential,
+        
+        [Parameter(Mandatory=$false)]
+        [WinRMSessionOptions]$SessionOptions
     )
 
     $token = [AuthToken]::new()
     try {
         Import-Module ActiveDirectory -ErrorAction Stop
         
-        # 簡易的なAD認証チェック
-        Get-ADDomain -Credential $Credential -ErrorAction Stop | Out-Null
+        if (-not $SessionOptions) {
+            $SessionOptions = [WinRMSessionOptions]::new()
+        }
+
+        # WinRMセッション作成
+        $session = New-WinRMSession -Credential $Credential -SessionOptions $SessionOptions
+        
+        # セッションを利用した認証チェック
+        Invoke-Command -Session $session -ScriptBlock {
+            Get-ADDomain -Credential $using:Credential -ErrorAction Stop | Out-Null
+        }
         
         $token.AccessToken = "AD-" + (New-Guid).Guid
         $token.ExpiresOn = (Get-Date).AddHours(1)
@@ -116,6 +138,36 @@ function Get-ADAuthToken {
     }
     catch {
         throw "AD認証失敗: $($_.Exception.Message)"
+    }
+}
+
+function New-WinRMSession {
+    param(
+        [Parameter(Mandatory=$true)]
+        [pscredential]$Credential,
+        
+        [Parameter(Mandatory=$true)]
+        [WinRMSessionOptions]$SessionOptions
+    )
+    
+    $sessionParams = @{
+        Credential = $Credential
+        UseSSL = $SessionOptions.UseSSL
+        Authentication = $SessionOptions.Authentication
+        Port = $SessionOptions.Port
+        OperationTimeout = $SessionOptions.OperationTimeout
+        SessionOption = New-WSManSessionOption -SkipCACheck:$SessionOptions.SkipCACheck `
+                                              -SkipCNCheck:$SessionOptions.SkipCNCheck `
+                                              -SkipRevocationCheck:$SessionOptions.SkipRevocationCheck
+    }
+
+    try {
+        $session = New-PSSession @sessionParams
+        return $session
+    }
+    catch {
+        Write-Log -Message "WinRMセッション作成失敗: $($_.Exception.Message)" -Level Error
+        throw
     }
 }
 

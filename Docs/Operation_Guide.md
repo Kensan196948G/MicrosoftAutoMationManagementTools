@@ -37,12 +37,29 @@
 ### 5.3. ログのアーカイブと削除
 古いログファイルのアーカイブと削除手順について説明します。
 
-## Active Directory PowerShellリモート管理の注意点
+## Active Directory PowerShellリモート管理の注意点 (v2.1)
 
-- ADWS (Active Directory Web Services) を起動する際は、必ず管理者権限でPowerShellを実行してください。権限不足により接続エラーが発生する場合があります。
-- RSAT (Remote Server Administration Tools) の導入はWindowsのバージョンに依存します。Windows 10/11のバージョンに応じたRSATのインストールを行ってください。
-- よくあるエラー例と対処法の具体例は、`Docs/Active Directory PowerShellリモート管理・操作 詳細手順書.txt` を参照してください。
-- リモートコマンドの実行例は表記を統一しており、以下の形式を推奨しています。
+- **基本要件**:
+  - ADWS (Active Directory Web Services) を起動する際は、必ず管理者権限でPowerShellを実行
+  - RSAT (Remote Server Administration Tools) の導入はWindowsのバージョンに依存
+
+- **セキュリティ要件**:
+  - SSL/TLS 1.2以上が必須 (詳細は[セキュリティ設計書](AD_Connection_Security_Design.md)参照)
+  - 基本認証無効化、Kerberos認証推奨
+  - 5986ポート(HTTPS)を使用
+
+- **トラブルシューティング**:
+  - よくあるエラー例と対処法: `Docs/Active Directory PowerShellリモート管理・操作 詳細手順書.txt` 参照
+  - 接続テストコマンド:
+    ```powershell
+    Test-WSMan -ComputerName <サーバー> -UseSSL -Authentication Kerberos
+    ```
+
+- **実行例**:
+  ```powershell
+  # 推奨形式 (v2.1)
+  Invoke-Command -ComputerName <サーバー> -UseSSL -Authentication Kerberos -ScriptBlock { <コマンド> }
+  ```
 
 ```powershell
 Invoke-Command -ComputerName <サーバー名> -ScriptBlock { <コマンド> }

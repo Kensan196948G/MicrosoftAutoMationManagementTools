@@ -1,9 +1,48 @@
 # ログ出力はCore/Logging.ps1のWrite-Logを使用
 
+function Invoke-ADCommand {
+    param(
+        [Parameter(Mandatory=$true)]
+        [scriptblock]$ScriptBlock,
+
+        [Parameter(Mandatory=$true)]
+        [pscredential]$Credential,
+
+        [Parameter(Mandatory=$true)]
+        [string]$Server,
+
+        [Parameter(Mandatory=$false)]
+        [WinRMSessionOptions]$SessionOptions
+    )
+
+    try {
+        if (-not $SessionOptions) {
+            $SessionOptions = [WinRMSessionOptions]::new()
+        }
+
+        $session = New-WinRMSession -Credential $Credential -SessionOptions $SessionOptions -Server $Server
+        $result = Invoke-Command -Session $session -ScriptBlock {
+            Import-Module ActiveDirectory -ErrorAction Stop
+            & $using:ScriptBlock
+        }
+        
+        return $result
+    }
+    catch {
+        Write-Log -Message "ADコマンド実行失敗: $($_.Exception.Message)" -Level "Error" -LogDirectory $global:Config.ErrorLogPath
+        throw "AD操作中にエラーが発生しました: $($_.Exception.Message)"
+    }
+    finally {
+        if ($session) {
+            Remove-PSSession -Session $session -ErrorAction SilentlyContinue
+        }
+    }
+}
+
 function Set-User {
     param(
         [Parameter(Mandatory=$true)]
-        [string]$UserName,  # 修正ポイント: エラー処理強化とログ出力追加
+        [string]$UserName,
 
         [Parameter(Mandatory=$false)]
         [string]$DisplayName,
@@ -12,21 +51,14 @@ function Set-User {
         [string]$EmailAddress,
 
         [Parameter(Mandatory=$true)]
-        [System.Management.Automation.PSCredential]$Credential,
+        [pscredential]$Credential,
 
         [Parameter(Mandatory=$true)]
-        [string]$Server  # 修正ポイント: 接続先サーバーを指定するパラメータ追加
-    )
+        [string]$Server,
 
-    # RSATのActive Directoryモジュールが利用可能かチェック
-    try {
-        Import-Module ActiveDirectory -ErrorAction Stop
-    }
-    catch {
-        Write-Host "Active Directoryモジュールが見つかりません。RSATがインストールされているか確認してください。" -ForegroundColor Red
-        Read-Host "エラーが発生しました。Enterキーを押して続行してください。"  # 修正ポイント: ユーザー入力待ち追加
-        return
-    }
+        [Parameter(Mandatory=$false)]
+        [WinRMSessionOptions]$SessionOptions
+    )
 
     if ([string]::IsNullOrEmpty($UserName)) {
         Write-Host "UserName パラメータは必須であり、空にできません。" -ForegroundColor Red
@@ -45,25 +77,15 @@ function Set-User {
             return
         }
 
-        try {
-            Set-ADUser -Identity $UserName @properties -Credential $Credential -Server $Server -ErrorAction Stop
-            Write-Host "ユーザー情報を更新しました: $UserName" -ForegroundColor Green
+        $scriptBlock = {
+            param($UserName, $properties)
+            Set-ADUser -Identity $UserName @properties -ErrorAction Stop
         }
-        catch {
-            Write-Host "ユーザー情報変更中にエラーが発生しました: $_" -ForegroundColor Red
-            # 修正ポイント: 認証情報ミスの可能性がある場合の解説コメント追加
-            # 【認証情報ミスの原因例】
-            # - Credentialオブジェクトのユーザー名またはパスワードが誤っている
-            # - アカウントがロックされている、または権限不足
-            # - サーバー側で認証方式が変更された
-            # 【解決策】
-            # - Credentialの内容を再確認し、正しい資格情報を使用する
-            # - アカウント状態を管理者に確認する
-            # - サーバーの認証設定を確認し、必要に応じて更新する
-            $errorMessage = $_.Exception.Message
-            Write-Log -Message "Set-User エラー: $errorMessage" -Level "Error" -LogDirectory $global:Config.ErrorLogPath
-            Read-Host "エラーが発生しました。Enterキーを押して続行してください。"
-        }
+
+        Invoke-ADCommand -ScriptBlock $scriptBlock -ArgumentList $UserName, $properties `
+                        -Credential $Credential -Server $Server -SessionOptions $SessionOptions
+        
+        Write-Log -Message "ユーザー情報を更新しました: $UserName" -Level "Audit" -LogDirectory $global:Config.LogPath
     }
     catch {
         Write-Host "ユーザー情報変更処理中に予期せぬエラーが発生しました: $_" -ForegroundColor Red

@@ -1,6 +1,11 @@
-# Microsoft製品運用自動化ツール
+# Microsoft製品運用自動化ツール (v2.1)
 
 ## 概要
+- **セキュリティ強化**:
+  - WinRM接続にSSL/TLS 1.2以上を必須化
+  - Kerberos認証を標準採用
+  - 詳細は[セキュリティポリシー](Docs/SecurityPolicy.md)参照
+
 本ツールは、Microsoft 365, Entra ID (旧 Azure AD), Exchange Online の管理業務を自動化し、ITSMプラクティスとISO27001/27002の統制要件に準拠することを目的としています。PowerShellベースで開発されており、各種管理タスクの効率化とセキュリティ強化に貢献します。
 
 ## 主要機能
