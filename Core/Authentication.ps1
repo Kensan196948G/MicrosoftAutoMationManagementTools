@@ -1,6 +1,60 @@
 # Core/Authentication.ps1
 
-function Get-M365GraphAccessToken {
+class AuthToken {
+    [string]$AccessToken
+    [datetime]$ExpiresOn
+    [string]$TokenType
+    [string]$Resource
+}
+
+<#
+.SYNOPSIS
+統一認証モジュール - Microsoft 365とADの認証を統合
+#>
+function Get-UnifiedAuthToken {
+    param(
+        [Parameter(Mandatory=$true)]
+        [ValidateSet("Graph", "AD")]
+        [string]$AuthType,
+        
+        [Parameter(Mandatory=$true)]
+        [pscredential]$Credential,
+        
+        [Parameter(Mandatory=$false)]
+        [string]$TenantId,
+        
+        [Parameter(Mandatory=$false)]
+        [string]$Resource = "https://graph.microsoft.com"
+    )
+
+    try {
+        switch ($AuthType) {
+            "Graph" {
+                $tokenParams = @{
+                    TenantId = $TenantId
+                    ClientId = $Credential.UserName
+                    ClientSecret = $Credential.Password
+                    GraphScope = "$Resource/.default"
+                }
+                $token = Get-M365GraphToken @tokenParams
+            }
+            "AD" {
+                $token = Get-ADAuthToken -Credential $Credential
+            }
+        }
+
+        # ログ出力
+        Write-Log -Message "認証成功: $AuthType" -Level "Audit" -LogDirectory $global:Config.LogPath
+        
+        return $token
+    }
+    catch {
+        Write-Log -Message "認証失敗: $($_.Exception.Message)" -Level "Error" -LogDirectory $global:Config.ErrorLogPath
+        throw
+    }
+}
+
+function Get-M365GraphToken {
     param(
         [Parameter(Mandatory=$true)]
         [string]$TenantId,
@@ -12,16 +66,9 @@ function Get-M365GraphAccessToken {
         [string]$GraphScope = "https://graph.microsoft.com/.default"
     )
 
+    $token = [AuthToken]::new()
     try {
-        # SecureStringを平文に変換
-        $clientSecretPlain = [Runtime.InteropServices.Marshal]::PtrToStringAuto(
-            [Runtime.InteropServices.Marshal]::SecureStringToBSTR($ClientSecret)
-        )
-        # 平文のClientSecretは直ちに使用し、メモリから解放する
-        [System.Runtime.InteropServices.Marshal]::ZeroFreeBSTR(
-            [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($ClientSecret)
-        )
-
+        $clientSecretPlain = ConvertFrom-SecureString -SecureString $ClientSecret -AsPlainText
         $Body = @{
             grant_type    = "client_credentials"
             scope         = $GraphScope
@@ -29,22 +76,48 @@ function Get-M365GraphAccessToken {
             client_secret = $clientSecretPlain
         }
 
-        Write-Host "Getting access token for Microsoft Graph..."
-        $TokenResponse = Invoke-RestMethod -Method Post -Uri "https://login.microsoftonline.com/$TenantId/oauth2/v2.0/token" -Body $Body
-        
-        # 平文のClientSecretは使用後すぐにクリア
-        $clientSecretPlain = $null
-        Remove-Variable clientSecretPlain -ErrorAction SilentlyContinue
+        $TokenResponse = Invoke-RestMethod -Method Post `
+            -Uri "https://login.microsoftonline.com/$TenantId/oauth2/v2.0/token" `
+            -Body $Body
 
-        Write-Host "Access Token acquired." # AccessToken の先頭一部のみ表示する場合はここを修正
-        return $TokenResponse.access_token
+        $token.AccessToken = $TokenResponse.access_token
+        $token.ExpiresOn = (Get-Date).AddSeconds($TokenResponse.expires_in)
+        $token.TokenType = $TokenResponse.token_type
+        $token.Resource = $GraphScope
+
+        return $token
     }
-    catch {
-        Write-Error "Failed to get access token for Microsoft Graph: $($_.Exception.Message)"
-        return $null
+    finally {
+        if ($clientSecretPlain) {
+            $clientSecretPlain = $null
+        }
     }
 }
 
-# TODO: トークンのキャッシュとリフレッシュ処理の追加
-# TODO: Connect-MgGraph 認証への再検討（必要に応じて）
-# TODO: 証明書認証への拡張 (今後の課題)
+function Get-ADAuthToken {
+    param(
+        [Parameter(Mandatory=$true)]
+        [pscredential]$Credential
+    )
+
+    $token = [AuthToken]::new()
+    try {
+        Import-Module ActiveDirectory -ErrorAction Stop
+        
+        # 簡易的なAD認証チェック
+        Get-ADDomain -Credential $Credential -ErrorAction Stop | Out-Null
+        
+        $token.AccessToken = "AD-" + (New-Guid).Guid
+        $token.ExpiresOn = (Get-Date).AddHours(1)
+        $token.TokenType = "AD"
+        $token.Resource = "ActiveDirectory"
+
+        return $token
+    }
+    catch {
+        throw "AD認証失敗: $($_.Exception.Message)"
+    }
+}
+
+# トークンキャッシュ用
+$global:TokenCache = @{}

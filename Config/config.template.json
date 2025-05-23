@@ -1,0 +1,12 @@
+﻿{
+    "ClientId":  "your-client-id",
+    "LogLevel":  "Normal",
+    "ErrorLogPath":  "Logs/ErrorLogs",
+    "AuditLogPath":  "Logs/AuditLogs",
+    "LogPath":  "Logs/RunLogs",
+    "DefaultScopes":  [
+                          "User.Read.All",
+                          "Directory.Read.All"
+                      ],
+    "TenantId":  "your-tenant-id"
+}

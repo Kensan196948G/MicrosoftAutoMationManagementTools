@@ -14,24 +14,35 @@ $config = Get-Configuration -ConfigFilePath (Join-Path $PSScriptRoot "Config/con
 $global:AccessToken = $null # グローバル変数としてAccessTokenを保持
 
 if ($null -ne $config) {
-    $tenantId = $config.TenantId
-    $clientId = $config.ClientId
-    # スコープはGraphのデフォルトスコープを使用 (ユーザー提示の例に合わせる)
-    $graphScope = "https://graph.microsoft.com/.default"
-
-    # ClientSecretをユーザーに入力させる
-    $clientSecret = Read-Host -Prompt "Client Secret を入力してください" -AsSecureString
-
-    if ($null -ne $clientSecret) {
-        $global:AccessToken = Get-M365GraphAccessToken -TenantId $tenantId -ClientId $clientId -ClientSecret $clientSecret -GraphScope $graphScope
-        if ($null -eq $global:AccessToken) {
-            Write-Error "Microsoft Graph Access Token の取得に失敗しました。"
+    try {
+        # secrets.enc.jsonから機密情報を安全に読み込み
+        $secretsPath = Join-Path $PSScriptRoot "Config\secrets.enc.json"
+        $secureSecrets = Get-SecureSecrets -SecretsFilePath $secretsPath
+        
+        if ($null -eq $secureSecrets) {
+            throw "secrets.enc.jsonの読み込みに失敗しました"
         }
-    } else {
-        Write-Error "Client Secret が入力されませんでした。"
+
+        $tenantId = $config.TenantId
+        $clientId = $config.ClientId
+        $graphScope = "https://graph.microsoft.com/.default"
+        
+        $credential = New-Object System.Management.Automation.PSCredential(
+            $clientId,
+            $secureSecrets.ClientSecret
+        )
+        
+        $global:AccessToken = Get-UnifiedAuthToken -AuthType "Graph" -Credential $credential -TenantId $tenantId
+    }
+    catch {
+        Write-Log -Message "認証処理失敗: $($_.Exception.Message)" -Level "Error" -LogDirectory $config.ErrorLogPath
+        Write-Host "認証に失敗しました。詳細はエラーログを確認してください。" -ForegroundColor Red
+        exit 1
     }
 } else {
-    Write-Error "設定ファイルの読み込みに失敗しました。config.jsonを確認してください。"
+    Write-Log -Message "設定ファイルの読み込みに失敗" -Level "Error" -LogDirectory "Logs/ErrorLogs"
+    Write-Host "設定ファイルの読み込みに失敗しました。config.jsonを確認してください。" -ForegroundColor Red
+    exit 1
 }
 
 # AD接続処理関数を追加
