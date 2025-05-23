@@ -90,3 +90,12 @@ MicrosoftAutoMationManagementTools/
 
 ## ライセンス
 このプロジェクトは、MITライセンスの下で公開されています。
+
+## Active Directory PowerShellリモート管理について
+
+本ツールのActive Directory PowerShellリモート管理機能を利用する際は、以下の点にご注意ください。
+
+- ADWS (Active Directory Web Services) を起動する際は、必ず管理者権限でPowerShellを実行してください。権限不足により接続エラーが発生する場合があります。
+- RSAT (Remote Server Administration Tools) の導入はWindowsのバージョンに依存します。Windows 10/11のバージョンに応じたRSATのインストールを行ってください。
+- よくあるエラー例と対処法については、Docs/Active Directory PowerShellリモート管理・操作 詳細手順書.txtを参照してください。
+- リモートコマンドの実行例は表記を統一しており、`Invoke-Command -ComputerName <サーバー名> -ScriptBlock { <コマンド> }` の形式を推奨しています。

@@ -1,0 +1,133 @@
+# Active Directory PowerShellリモート管理・操作 詳細手順書
+
+---
+
+## 1. サーバー（VMSV3001）側の準備
+
+### 1-1. Active Directory Web Services（ADWS）の確認
+
+* コマンドプロンプトまたはPowerShellを**管理者権限で**実行してください  # 修正ポイント: 管理者権限明記
+
+```
+Get-Service ADWS
+```
+
+* 結果が `Status: Running` であればOK
+* 停止している場合：
+
+```
+Start-Service ADWS
+```
+
+### 1-2. WinRM（Windowsリモート管理）の有効化
+
+* 管理者権限のPowerShellで実行
+
+```
+Enable-PSRemoting -Force
+```
+
+* `Get-Service WinRM` で `Running` 状態か確認
+* `winrm quickconfig` で詳細確認
+
+---
+
+## 2. クライアント（管理用PC）側の準備
+
+### 2-1. RSAT（リモートサーバー管理ツール）導入
+
+* Windows 10/11の場合（PowerShell管理者権限）
+
+```
+Get-WindowsCapability -Name RSAT.ActiveDirectory* -Online | Add-WindowsCapability -Online
+```
+
+* または「設定」→「アプリ」→「オプション機能」から追加
+* **注意**：RSATの導入方法はWindowsのバージョンによって異なる場合があります。特にWindows 10の一部バージョンでは別途インストーラーが必要なことがあります。  # 修正ポイント: バージョン依存注意書き追加
+
+### 2-2. hostsファイル編集（必要な場合のみ）
+
+* 管理者権限で `C:\Windows\System32\drivers\etc\hosts` を開く
+* 末尾に以下を追記
+
+```
+172.23.201.1   VMSV3001
+```
+
+* 保存して閉じる（反映は即時）
+* 反映確認：
+
+```
+ping VMSV3001
+```
+
+### 2-3. TrustedHosts設定
+
+* 管理者権限PowerShellで実行
+
+```
+Set-Item WSMan:\localhost\Client\TrustedHosts -Value "VMSV3001,172.23.201.1"
+Get-Item WSMan:\localhost\Client\TrustedHosts   # 反映確認
+```
+
+---
+
+## 3. リモート接続と操作
+
+### 3-1. リモートセッション開始
+
+* PowerShellを管理者権限で起動し、以下を実行してください。  # 修正ポイント: 管理者権限明記
+
+```
+Enter-PSSession -ComputerName VMSV3001 -Credential (Get-Credential)
+```
+
+* ユーザー名は「Mirai\administrator」などドメイン形式で入力してください。
+* プロンプトが `[VMSV3001]:` に変わります。
+
+### 3-2. サーバー上で操作例
+
+```
+Get-Service ADWS
+Get-ADUser -Filter *
+```
+
+* サーバー側で直接コマンドが動作します。
+* 終了は `exit` でローカルプロンプトに戻ります。
+
+### 3-3. 都度コマンド実行（セッション不要の場合）
+
+* ローカルPCからリモートでコマンドを実行する場合は、以下のように一貫した形式で実行してください。  # 修正ポイント: コマンド例の一貫性向上
+
+```
+Invoke-Command -ComputerName VMSV3001 -Credential (Get-Credential) -ScriptBlock { Get-Service ADWS }
+```
+
+* Active Directoryコマンドの場合は、サーバー指定と認証情報を明示して実行します。
+
+```
+Get-ADUser -Server VMSV3001 -Credential (Get-Credential) -Filter *
+```
+
+\---
+
+## 4. よくあるエラーと解決法
+
+| エラー内容                                            | 主な原因                    | 解決策                          |
+| ------------------------------------------------ | ----------------------- | ---------------------------- |
+| Cannot find any service with service name 'ADWS' | クライアントPCにADWSがない        | サーバーで実行する/リモートセッションで実行。例：`Enter-PSSession`でサーバーに接続してからコマンド実行。       |  # 修正ポイント: 解決策具体例追記
+| Active Directory Webサービスが…既定サーバーを検索できません         | サーバー指定なし、認証情報不足         | -Serverでサーバー明示＋Credential指定。例：`Get-ADUser -Server VMSV3001 -Credential (Get-Credential)`  |
+| WinRM クライアントは要求を処理できません                          | TrustedHosts未設定、認証方式不一致 | TrustedHosts追加＋-Credential指定。例：`Set-Item WSMan:\localhost\Client\TrustedHosts -Value "VMSV3001"`  |
+
+\---
+
+## 5. 運用のポイント
+
+* クライアント側で直接ADサーバー管理したい場合は、「リモートセッション」または「Invoke-Command」推奨
+* hostsファイル・TrustedHosts・RSAT導入は“3点セット”で
+* サーバー/クライアント両側とも“管理者権限”で実行
+* ユーザー名はドメイン形式で！（例：Mirai\administrator）
+
+---
+
+##

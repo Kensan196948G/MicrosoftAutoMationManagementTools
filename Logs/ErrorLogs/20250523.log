@@ -1,0 +1,216 @@
+[2025-05-23 10:49:48] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: Cannot bind argument to parameter 'UserName' because it is an empty string.
+[2025-05-23 10:49:48] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 136
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 507
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 10:49:48] [Error] Error Category: InvalidData
+[2025-05-23 10:57:41] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: Cannot bind argument to parameter 'UserName' because it is an empty string.
+[2025-05-23 10:57:41] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 136
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 507
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 10:57:41] [Error] Error Category: InvalidData
+[2025-05-23 10:57:55] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: Cannot bind argument to parameter 'UserName' because it is an empty string.
+[2025-05-23 10:57:55] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 136
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 507
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 10:57:55] [Error] Error Category: InvalidData
+[2025-05-23 10:58:05] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: Cannot bind argument to parameter 'UserName' because it is an empty string.
+[2025-05-23 10:58:05] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 141
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 507
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 10:58:05] [Error] Error Category: InvalidData
+[2025-05-23 10:58:39] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: Cannot bind argument to parameter 'UserName' because it is an empty string.
+[2025-05-23 10:58:39] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 136
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 507
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 10:58:40] [Error] Error Category: InvalidData
+[2025-05-23 11:00:04] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: Cannot bind argument to parameter 'UserName' because it is an empty string.
+[2025-05-23 11:00:04] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 136
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 507
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 11:00:04] [Error] Error Category: InvalidData
+[2025-05-23 11:00:14] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: Cannot bind argument to parameter 'UserName' because it is an empty string.
+[2025-05-23 11:00:14] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 136
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 507
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 11:00:14] [Error] Error Category: InvalidData
+[2025-05-23 11:00:36] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: ユーザー情報変更中にエラーが発生しました: Active Directory Web サービスが実行されている状態で既定のサーバーを検索することはできません。
+[2025-05-23 11:00:37] [Error] StackTrace: at Set-User, E:\MicrosoftAutoMationManagementTools\Modules\UserManagement.ps1: line 115
+at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 141
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 507
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 11:00:37] [Error] Error Category: NotSpecified
+[2025-05-23 11:10:15] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: Cannot bind argument to parameter 'UserName' because it is an empty string.
+[2025-05-23 11:10:15] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 136
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 507
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 11:10:15] [Error] Error Category: InvalidData
+[2025-05-23 11:11:27] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: ユーザー作成中にエラーが発生しました: Active Directory Web サービスが実行されている状態で既定のサーバーを検索することはできません。
+[2025-05-23 11:11:27] [Error] StackTrace: at New-User, E:\MicrosoftAutoMationManagementTools\Modules\UserManagement.ps1: line 60
+at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 142
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 514
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 11:11:27] [Error] Error Category: NotSpecified
+[2025-05-23 11:12:55] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: Cannot bind argument to parameter 'UserName' because it is an empty string.
+[2025-05-23 11:12:55] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 142
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 514
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 11:12:55] [Error] Error Category: InvalidData
+[2025-05-23 11:17:24] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: Cannot bind argument to parameter 'UserName' because it is an empty string.
+[2025-05-23 11:17:24] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 142
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 514
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 11:17:24] [Error] Error Category: InvalidData
+[2025-05-23 11:17:58] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: Cannot bind argument to parameter 'UserName' because it is an empty string.
+[2025-05-23 11:17:58] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 142
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 514
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 11:17:58] [Error] Error Category: InvalidData
+[2025-05-23 11:19:39] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: Cannot bind argument to parameter 'UserName' because it is an empty string.
+[2025-05-23 11:19:39] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 148
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 519
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 11:19:39] [Error] Error Category: InvalidData
+[2025-05-23 11:20:38] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: Cannot bind argument to parameter 'UserName' because it is an empty string.
+[2025-05-23 11:20:38] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 153
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 519
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 11:20:38] [Error] Error Category: InvalidData
+[2025-05-23 11:24:30] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: Cannot bind argument to parameter 'UserName' because it is an empty string.
+[2025-05-23 11:24:30] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 153
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 519
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 11:24:30] [Error] Error Category: InvalidData
+[2025-05-23 11:24:40] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: Cannot bind argument to parameter 'UserName' because it is an empty string.
+[2025-05-23 11:24:40] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 148
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 519
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 11:24:40] [Error] Error Category: InvalidData
+[2025-05-23 11:24:52] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: Cannot bind argument to parameter 'UserName' because it is an empty string.
+[2025-05-23 11:24:52] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 153
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 519
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 11:24:52] [Error] Error Category: InvalidData
+[2025-05-23 11:27:31] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: Cannot bind argument to parameter 'UserName' because it is an empty string.
+[2025-05-23 11:27:31] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 148
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 519
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 11:27:31] [Error] Error Category: InvalidData
+[2025-05-23 11:27:40] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: Cannot bind argument to parameter 'UserName' because it is an empty string.
+[2025-05-23 11:27:40] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 153
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 519
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 11:27:40] [Error] Error Category: InvalidData
+[2025-05-23 11:27:49] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: Cannot bind argument to parameter 'UserName' because it is an empty string.
+[2025-05-23 11:27:49] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 159
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 519
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 11:27:49] [Error] Error Category: InvalidData
+[2025-05-23 13:12:49] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: The term 'New-User' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+[2025-05-23 13:12:49] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 148
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 519
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 13:12:49] [Error] Error Category: ObjectNotFound
+[2025-05-23 13:12:56] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: The term 'Set-User' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+[2025-05-23 13:12:56] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 153
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 519
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 13:12:56] [Error] Error Category: ObjectNotFound
+[2025-05-23 13:13:02] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: The term 'Remove-User' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+[2025-05-23 13:13:02] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 159
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 519
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 13:13:02] [Error] Error Category: ObjectNotFound
+[2025-05-23 13:32:09] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: ユーザー情報変更中にエラーが発生しました: Active Directory Web サービスが実行されている状態で既定のサーバーを検索することはできません。
+[2025-05-23 13:32:09] [Error] StackTrace: at Set-User, E:\MicrosoftAutoMationManagementTools\Modules\UserManagement.ps1: line 50
+at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 159
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 532
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 13:32:09] [Error] Error Category: NotSpecified
+[2025-05-23 14:41:10] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: A parameter cannot be found that matches parameter name 'Department'.
+[2025-05-23 14:41:10] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 164
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 538
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 14:41:10] [Error] Error Category: InvalidArgument
+[2025-05-23 14:53:36] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: A parameter cannot be found that matches parameter name 'Department'.
+[2025-05-23 14:53:36] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 164
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 538
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 14:53:36] [Error] Error Category: InvalidArgument
+[2025-05-23 15:01:24] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: ユーザー情報変更中にエラーが発生しました: Active Directory Web サービスが実行されている状態で既定のサーバーを検索することはできません。
+[2025-05-23 15:01:24] [Error] StackTrace: at Set-User, E:\MicrosoftAutoMationManagementTools\Modules\UserManagement.ps1: line 46
+at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 164
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 538
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 15:01:24] [Error] Error Category: NotSpecified
+[2025-05-23 15:08:46] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: ユーザー情報変更中にエラーが発生しました: Active Directory Web サービスが実行されている状態で既定のサーバーを検索することはできません。
+[2025-05-23 15:08:46] [Error] StackTrace: at Set-User, E:\MicrosoftAutoMationManagementTools\Modules\UserManagement.ps1: line 46
+at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 164
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 538
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 15:08:46] [Error] Error Category: NotSpecified
+[2025-05-23 15:27:54] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: ユーザー情報変更中にエラーが発生しました: Active Directory Web サービスが実行されている状態で既定のサーバーを検索することはできません。
+[2025-05-23 15:27:54] [Error] StackTrace: at Set-User, E:\MicrosoftAutoMationManagementTools\Modules\UserManagement.ps1: line 46
+at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 164
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 538
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 15:27:54] [Error] Error Category: NotSpecified
+[2025-05-23 15:37:10] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: ユーザー情報変更中にエラーが発生しました: Active Directory Web サービスが実行されている状態で既定のサーバーを検索することはできません。
+[2025-05-23 15:37:10] [Error] StackTrace: at Set-User, E:\MicrosoftAutoMationManagementTools\Modules\UserManagement.ps1: line 46
+at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 164
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 538
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 15:37:10] [Error] Error Category: NotSpecified
+2025-05-23 16:29:09 [Error] Set-User エラー: Active Directory Web サービスが実行されている状態で既定のサーバーを検索することはできません。
+[2025-05-23 16:51:41] [Error] ユーザー管理サブメニュー処理中にエラーが発生しました。 - Original Error: The term 'New-User' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+[2025-05-23 16:51:41] [Error] StackTrace: at Invoke-UserManagementMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 148
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 71
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 538
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 16:51:41] [Error] Error Category: ObjectNotFound
+[2025-05-23 17:06:57] [Error] CLIメニュー処理中にエラーが発生しました。 - Original Error: The term 'Invoke-UserManagementMenu' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+[2025-05-23 17:06:57] [Error] StackTrace: at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 104
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 153
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 17:06:57] [Error] Error Category: ObjectNotFound
+[2025-05-23 17:13:31] [Error] CLIメニュー処理中にエラーが発生しました。 - Original Error: Active Directory Web サービスが実行されている状態で既定のサーバーを検索することはできません。
+[2025-05-23 17:13:31] [Error] StackTrace: at Connect-ADAdmin, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 51
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 108
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 167
+at <ScriptBlock>, <No file>: line 1
+[2025-05-23 17:13:31] [Error] Error Category: ResourceUnavailable
