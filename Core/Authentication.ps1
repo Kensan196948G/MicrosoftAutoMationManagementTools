@@ -1,4 +1,6 @@
 # Core/Authentication.ps1
+# 修正ポイント: エラーメッセージ日本語化とログ形式統一
+Import-Module "$PSScriptRoot/../Modules/ErrorMessages.ps1" -Force
 
 class AuthToken {
     [string]$AccessToken
@@ -61,8 +63,14 @@ function Get-UnifiedAuthToken {
     }
     catch {
         $errorDir = if ($global:Config -and $global:Config.ErrorLogPath) { $global:Config.ErrorLogPath } else { "Logs/ErrorLogs" }
-        Write-Log -Message "認証失敗: $($_.Exception.Message)" -Level "Error" -LogDirectory $errorDir
-        throw
+        $errorCode = if ($_.Exception.Message -match "invalid_client") { "AUTH001" }
+                    elseif ($_.Exception.Message -match "expired") { "AUTH002" }
+                    else { "AUTH000" }
+        
+        $errorMsg = Get-ErrorMessage -ErrorCode $errorCode -DefaultMessage $_.Exception.Message
+        $logMsg = "[$(Get-Date -Format 'yyyy/MM/dd HH:mm')] [ERROR] [UnifiedAuth] [$errorCode] $errorMsg"
+        Write-Log -Message $logMsg -Level "Error" -LogDirectory $errorDir
+        throw $errorMsg
     }
 }
 
@@ -80,14 +88,12 @@ function Get-M365GraphToken {
 
     $token = [AuthToken]::new()
     try {
-        $clientSecretPlain = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto(
-            [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($ClientSecret)
-        )
+        # 修正ポイント: SecureStringを直接使用し平文変換を排除
         $Body = @{
             grant_type    = "client_credentials"
             scope         = $GraphScope
             client_id     = $ClientId
-            client_secret = $clientSecretPlain
+            client_secret = $ClientSecret
         }
 
         $TokenResponse = Invoke-RestMethod -Method Post `
@@ -101,10 +107,19 @@ function Get-M365GraphToken {
 
         return $token
     }
+    catch {
+        $errorCode = if ($_.Exception.Message -match "invalid_client") { "AUTH001" }
+                    elseif ($_.Exception.Message -match "invalid_tenant") { "AUTH003" }
+                    else { "AUTH000" }
+        
+        $errorMsg = Get-ErrorMessage -ErrorCode $errorCode -DefaultMessage $_.Exception.Message
+        $logMsg = "[$(Get-Date -Format 'yyyy/MM/dd HH:mm')] [ERROR] [GraphAuth] [$errorCode] $errorMsg"
+        Write-Log -Message $logMsg -Level "Error" -LogDirectory $errorDir
+        throw $errorMsg
+    }
     finally {
-        if ($clientSecretPlain) {
-            $clientSecretPlain = $null
-        }
+        # 修正ポイント: メモリクリア処理を簡素化
+        Remove-Variable -Name "Body" -ErrorAction SilentlyContinue
     }
 }
 
@@ -143,7 +158,14 @@ function Get-ADAuthToken {
         return $token
     }
     catch {
-        throw "AD認証失敗: $($_.Exception.Message)"
+        $errorCode = if ($_.Exception.Message -match "credential") { "CONN003" }
+                    elseif ($_.Exception.Message -match "timeout") { "CONN002" }
+                    else { "CONN000" }
+        
+        $errorMsg = Get-ErrorMessage -ErrorCode $errorCode -DefaultMessage $_.Exception.Message
+        $logMsg = "[$(Get-Date -Format 'yyyy/MM/dd HH:mm')] [ERROR] [ADAuth] [$errorCode] $errorMsg"
+        Write-Log -Message $logMsg -Level "Error" -LogDirectory $errorDir
+        throw $errorMsg
     }
 }
 
@@ -180,8 +202,14 @@ function New-WinRMSession {
         return $session
     }
     catch {
-        Write-Log -Message "WinRMセッション作成失敗: $($_.Exception.Message)" -Level Error
-        throw
+        $errorCode = if ($_.Exception.Message -match "credential") { "CONN003" }
+                    elseif ($_.Exception.Message -match "timeout") { "CONN002" }
+                    else { "CONN000" }
+        
+        $errorMsg = Get-ErrorMessage -ErrorCode $errorCode -DefaultMessage $_.Exception.Message
+        $logMsg = "[$(Get-Date -Format 'yyyy/MM/dd HH:mm')] [ERROR] [WinRMSession] [$errorCode] $errorMsg"
+        Write-Log -Message $logMsg -Level "Error" -LogDirectory $errorDir
+        throw $errorMsg
     }
 }
 

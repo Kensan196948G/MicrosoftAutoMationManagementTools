@@ -1,499 +1,162 @@
-[2025-05-24 17:06:46] [Info] ADユーザー管理メニューを選択しました。AD管理者で操作中。
-[2025-05-24 17:07:08] [Info] ADユーザー管理メニューを選択しました。AD管理者で操作中。
-[2025-05-24 17:12:25] [Info] ADユーザー管理メニューを選択しました。AD管理者で操作中。
-[2025-05-24 17:12:29] [Info] CLIメニューを終了します。
-[2025-05-24 17:13:05] [Info] ADユーザー管理メニューを選択しました。AD管理者で操作中。
-[2025-05-24 17:16:41] [Info] CLIメニューを終了します。
-[2025-05-24 17:17:09] [Info] ADユーザー管理メニューを選択しました。AD管理者で操作中。
-[2025-05-24 17:17:34] [Info] CLIメニューを終了します。
-[2025-05-24 17:18:02] [Info] ADユーザー管理メニューを選択しました。AD管理者で操作中。
-[2025-05-24 17:21:40] [Info] CLIメニューを終了します。
-[2025-05-24 17:22:23] [Info] ADユーザー管理メニューを選択しました。AD管理者で操作中。
-[2025-05-24 17:25:09] [Info] CLIメニューを終了します。
-[2025-05-24 17:28:13] [Info] ADユーザー管理メニューを選択しました。AD管理者で操作中。
-[2025-05-24 17:29:26] [Info] CLIメニューを終了します。
-[2025-05-24 17:30:26] [Info] ADユーザー管理メニューを選択しました。AD管理者で操作中。
-[2025-05-24 17:30:45] [Info] ADユーザー管理メニューを選択しました。AD管理者で操作中。
-[2025-05-24 17:32:01] [Info] CLIメニューを終了します。
-[2025-05-24 17:50:34] [Info] ADユーザー管理メニューを選択しました。AD管理者で操作中。
-[2025-05-24 17:53:46] [Info] CLIメニューを終了します。
 === Log Entry ===
-Timestamp: 2025-05-24 17:55:07
+Timestamp: 2025/05/24 21:48:49
 Level: Info
-Message: ADユーザー管理メニューを選択しました。AD管理者で操作中。
-LogDirectory: Logs/RunLogs
+Module: System
+ErrorCode: NONE
+Message: 開始: Pesterテスト実行 (Scope: All)
+LogDirectory: Logs\RunLogs
 CallStack: 
-Command         Arguments                                                                       Location                 
--------         ---------                                                                       --------                 
-Write-Log       {Message=ADユーザー管理メニューを選択しました。AD管理者で操作中。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                                              MainCliMenu.ps1: line 173
-MainCliMenu.ps1 {}                                                                              MainCliMenu.ps1: line 232
-<ScriptBlock>   {}                                                                              <No file>                
+Command                   Arguments                                          Location                          
+-------                   ---------                                          --------                          
+Write-Log                 {Message=開始: Pesterテスト実行 (Scope: All), Level=Info} Logging.ps1: line 65              
+Invoke-FullValidation.ps1 {Scope=All, ReportFormat=HTML}                     Invoke-FullValidation.ps1: line 71
 
 
 
+PSVersion: 5.1.26100.4061
+RunAsUser: KENSANG196948\kensa
 ================
 === Log Entry ===
-Timestamp: 2025-05-24 17:56:49
+Timestamp: 2025/05/24 21:51:07
 Level: Info
-Message: CLIメニューを終了します。
-LogDirectory: Logs/RunLogs
+Module: System
+ErrorCode: NONE
+Message: 開始: Pesterテスト実行 (Scope: Core)
+LogDirectory: Logs\RunLogs
 CallStack: 
-Command         Arguments                                                       Location                 
--------         ---------                                                       --------                 
-Write-Log       {Message=CLIメニューを終了します。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                              MainCliMenu.ps1: line 211
-MainCliMenu.ps1 {}                                                              MainCliMenu.ps1: line 232
-<ScriptBlock>   {}                                                              <No file>                
+Command                   Arguments                                           Location                          
+-------                   ---------                                           --------                          
+Write-Log                 {Message=開始: Pesterテスト実行 (Scope: Core), Level=Info} Logging.ps1: line 65              
+Invoke-FullValidation.ps1 {Scope=Core, ReportFormat=HTML}                     Invoke-FullValidation.ps1: line 88
 
 
 
+PSVersion: 5.1.26100.4061
+RunAsUser: KENSANG196948\kensa
 ================
 === Log Entry ===
-Timestamp: 2025-05-24 18:00:26
+Timestamp: 2025/05/24 21:51:09
 Level: Info
-Message: CLIメニューを終了します。
-LogDirectory: Logs/RunLogs
+Module: System
+ErrorCode: NONE
+Message: at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\Tools\Invoke-FullValidation.ps1: line 89
+LogDirectory: Logs\RunLogs
 CallStack: 
-Command         Arguments                                                       Location                 
--------         ---------                                                       --------                 
-Write-Log       {Message=CLIメニューを終了します。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                              MainCliMenu.ps1: line 254
-MainCliMenu.ps1 {}                                                              MainCliMenu.ps1: line 275
-<ScriptBlock>   {}                                                              <No file>                
+Command                   Arguments                                                                                    
+-------                   ---------                                                                                    
+Write-Log                 {Message=at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\Tools\Invoke-FullValidati...
+Invoke-FullValidation.ps1 {Scope=Core, ReportFormat=HTML}                                                              
 
 
 
+PSVersion: 5.1.26100.4061
+RunAsUser: KENSANG196948\kensa
 ================
 === Log Entry ===
-Timestamp: 2025-05-24 18:05:24
+Timestamp: 2025/05/24 21:52:25
 Level: Info
-Message: CLIメニューを終了します。
-LogDirectory: Logs/RunLogs
+Module: System
+ErrorCode: NONE
+Message: 開始: Pesterテスト実行 (Scope: Core)
+LogDirectory: Logs\RunLogs
 CallStack: 
-Command         Arguments                                                       Location                 
--------         ---------                                                       --------                 
-Write-Log       {Message=CLIメニューを終了します。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                              MainCliMenu.ps1: line 264
-MainCliMenu.ps1 {}                                                              MainCliMenu.ps1: line 285
-<ScriptBlock>   {}                                                              <No file>                
+Command                   Arguments                                           Location                          
+-------                   ---------                                           --------                          
+Write-Log                 {Message=開始: Pesterテスト実行 (Scope: Core), Level=Info} Logging.ps1: line 65              
+Invoke-FullValidation.ps1 {Scope=Core, ReportFormat=HTML}                     Invoke-FullValidation.ps1: line 90
 
 
 
+PSVersion: 5.1.26100.4061
+RunAsUser: KENSANG196948\kensa
 ================
 === Log Entry ===
-Timestamp: 2025-05-24 18:08:10
+Timestamp: 2025/05/24 21:52:29
 Level: Info
-Message: CLIメニューを終了します。
-LogDirectory: Logs/RunLogs
+Module: System
+ErrorCode: NONE
+Message: 完了: Pesterテスト実行
+LogDirectory: Logs\RunLogs
 CallStack: 
-Command         Arguments                                                       Location                 
--------         ---------                                                       --------                 
-Write-Log       {Message=CLIメニューを終了します。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                              MainCliMenu.ps1: line 265
-MainCliMenu.ps1 {}                                                              MainCliMenu.ps1: line 286
-<ScriptBlock>   {}                                                              <No file>                
+Command                   Arguments                             Location                          
+-------                   ---------                             --------                          
+Write-Log                 {Message=完了: Pesterテスト実行, Level=Info} Logging.ps1: line 65              
+Invoke-FullValidation.ps1 {Scope=Core, ReportFormat=HTML}       Invoke-FullValidation.ps1: line 98
 
 
 
+PSVersion: 5.1.26100.4061
+RunAsUser: KENSANG196948\kensa
 ================
 === Log Entry ===
-Timestamp: 2025-05-24 18:13:35
+Timestamp: 2025/05/24 21:52:29
 Level: Info
-Message: CLIメニューを終了します。
-LogDirectory: Logs/RunLogs
+Module: System
+ErrorCode: NONE
+Message: 開始: 環境検証スクリプト実行
+LogDirectory: Logs\RunLogs
 CallStack: 
-Command         Arguments                                                       Location                 
--------         ---------                                                       --------                 
-Write-Log       {Message=CLIメニューを終了します。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                              MainCliMenu.ps1: line 265
-MainCliMenu.ps1 {}                                                              MainCliMenu.ps1: line 286
-<ScriptBlock>   {}                                                              <No file>                
+Command                   Arguments                             Location                           
+-------                   ---------                             --------                           
+Write-Log                 {Message=開始: 環境検証スクリプト実行, Level=Info} Logging.ps1: line 65               
+Invoke-FullValidation.ps1 {Scope=Core, ReportFormat=HTML}       Invoke-FullValidation.ps1: line 111
 
 
 
+PSVersion: 5.1.26100.4061
+RunAsUser: KENSANG196948\kensa
 ================
 === Log Entry ===
-Timestamp: 2025-05-24 18:17:25
+Timestamp: 2025/05/24 21:52:29
 Level: Info
-Message: CLIメニューを終了します。
-LogDirectory: Logs/RunLogs
+Module: System
+ErrorCode: NONE
+Message: 完了: 環境検証スクリプト実行
+LogDirectory: Logs\RunLogs
 CallStack: 
-Command         Arguments                                                       Location                 
--------         ---------                                                       --------                 
-Write-Log       {Message=CLIメニューを終了します。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                              MainCliMenu.ps1: line 265
-MainCliMenu.ps1 {}                                                              MainCliMenu.ps1: line 286
-<ScriptBlock>   {}                                                              <No file>                
+Command                   Arguments                             Location                           
+-------                   ---------                             --------                           
+Write-Log                 {Message=完了: 環境検証スクリプト実行, Level=Info} Logging.ps1: line 65               
+Invoke-FullValidation.ps1 {Scope=Core, ReportFormat=HTML}       Invoke-FullValidation.ps1: line 133
 
 
 
+PSVersion: 5.1.26100.4061
+RunAsUser: KENSANG196948\kensa
 ================
 === Log Entry ===
-Timestamp: 2025-05-24 18:22:46
+Timestamp: 2025/05/24 21:52:29
 Level: Info
-Message: ADグループ管理メニューを選択しました。AD管理者で操作中。
-LogDirectory: Logs/RunLogs
+Module: System
+ErrorCode: NONE
+Message: 開始: セキュリティスキャン
+LogDirectory: Logs\RunLogs
 CallStack: 
-Command         Arguments                                                                       Location                 
--------         ---------                                                                       --------                 
-Write-Log       {Message=ADグループ管理メニューを選択しました。AD管理者で操作中。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                                              MainCliMenu.ps1: line 242
-MainCliMenu.ps1 {}                                                                              MainCliMenu.ps1: line 291
-<ScriptBlock>   {}                                                                              <No file>                
+Command                   Arguments                            Location                           
+-------                   ---------                            --------                           
+Write-Log                 {Message=開始: セキュリティスキャン, Level=Info} Logging.ps1: line 65               
+Invoke-FullValidation.ps1 {Scope=Core, ReportFormat=HTML}      Invoke-FullValidation.ps1: line 136
 
 
 
+PSVersion: 5.1.26100.4061
+RunAsUser: KENSANG196948\kensa
 ================
 === Log Entry ===
-Timestamp: 2025-05-24 18:24:07
+Timestamp: 2025/05/24 21:52:32
 Level: Info
-Message: Exchange Online 管理メニューを選択しました。
-LogDirectory: Logs/RunLogs
+Module: System
+ErrorCode: NONE
+Message: at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\Tools\Invoke-FullValidation.ps1: line 138
+LogDirectory: Logs\RunLogs
 CallStack: 
-Command         Arguments                                                                       Location                 
--------         ---------                                                                       --------                 
-Write-Log       {Message=Exchange Online 管理メニューを選択しました。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                                              MainCliMenu.ps1: line 250
-MainCliMenu.ps1 {}                                                                              MainCliMenu.ps1: line 291
-<ScriptBlock>   {}                                                                              <No file>                
+Command                   Arguments                                                                                    
+-------                   ---------                                                                                    
+Write-Log                 {Message=at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\Tools\Invoke-FullValidati...
+Invoke-FullValidation.ps1 {Scope=Core, ReportFormat=HTML}                                                              
 
 
 
-================
-=== Log Entry ===
-Timestamp: 2025-05-24 18:28:39
-Level: Info
-Message: CLIメニューを終了します。
-LogDirectory: Logs/RunLogs
-CallStack: 
-Command         Arguments                                                       Location                 
--------         ---------                                                       --------                 
-Write-Log       {Message=CLIメニューを終了します。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                              MainCliMenu.ps1: line 270
-MainCliMenu.ps1 {}                                                              MainCliMenu.ps1: line 291
-<ScriptBlock>   {}                                                              <No file>                
-
-
-
-================
-=== Log Entry ===
-Timestamp: 2025-05-24 18:40:24
-Level: Info
-Message: ADグループ管理メニューを選択しました。AD管理者で操作中。
-LogDirectory: Logs/RunLogs
-CallStack: 
-Command         Arguments                                                                       Location                 
--------         ---------                                                                       --------                 
-Write-Log       {Message=ADグループ管理メニューを選択しました。AD管理者で操作中。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                                              MainCliMenu.ps1: line 244
-MainCliMenu.ps1 {}                                                                              MainCliMenu.ps1: line 476
-<ScriptBlock>   {}                                                                              <No file>                
-
-
-
-================
-=== Log Entry ===
-Timestamp: 2025-05-24 18:43:04
-Level: Info
-Message: ADグループ管理メニューを選択しました。AD管理者で操作中。
-LogDirectory: Logs/RunLogs
-CallStack: 
-Command         Arguments                                                                       Location                 
--------         ---------                                                                       --------                 
-Write-Log       {Message=ADグループ管理メニューを選択しました。AD管理者で操作中。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                                              MainCliMenu.ps1: line 244
-MainCliMenu.ps1 {}                                                                              MainCliMenu.ps1: line 476
-<ScriptBlock>   {}                                                                              <No file>                
-
-
-
-================
-=== Log Entry ===
-Timestamp: 2025-05-24 18:43:17
-Level: Info
-Message: ADグループ管理メニューを選択しました。AD管理者で操作中。
-LogDirectory: Logs/RunLogs
-CallStack: 
-Command         Arguments                                                                       Location                 
--------         ---------                                                                       --------                 
-Write-Log       {Message=ADグループ管理メニューを選択しました。AD管理者で操作中。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                                              MainCliMenu.ps1: line 244
-MainCliMenu.ps1 {}                                                                              MainCliMenu.ps1: line 476
-<ScriptBlock>   {}                                                                              <No file>                
-
-
-
-================
-=== Log Entry ===
-Timestamp: 2025-05-24 18:43:41
-Level: Info
-Message: CLIメニューを終了します。
-LogDirectory: Logs/RunLogs
-CallStack: 
-Command         Arguments                                                       Location                 
--------         ---------                                                       --------                 
-Write-Log       {Message=CLIメニューを終了します。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                              MainCliMenu.ps1: line 455
-MainCliMenu.ps1 {}                                                              MainCliMenu.ps1: line 476
-<ScriptBlock>   {}                                                              <No file>                
-
-
-
-================
-=== Log Entry ===
-Timestamp: 2025-05-24 18:46:50
-Level: Info
-Message: ADグループ管理メニューを選択しました。AD管理者で操作中。
-LogDirectory: Logs/RunLogs
-CallStack: 
-Command         Arguments                                                                       Location                 
--------         ---------                                                                       --------                 
-Write-Log       {Message=ADグループ管理メニューを選択しました。AD管理者で操作中。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                                              MainCliMenu.ps1: line 244
-MainCliMenu.ps1 {}                                                                              MainCliMenu.ps1: line 476
-<ScriptBlock>   {}                                                                              <No file>                
-
-
-
-================
-=== Log Entry ===
-Timestamp: 2025-05-24 18:47:32
-Level: Info
-Message: CLIメニューを終了します。
-LogDirectory: Logs/RunLogs
-CallStack: 
-Command         Arguments                                                       Location                 
--------         ---------                                                       --------                 
-Write-Log       {Message=CLIメニューを終了します。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                              MainCliMenu.ps1: line 455
-MainCliMenu.ps1 {}                                                              MainCliMenu.ps1: line 476
-<ScriptBlock>   {}                                                              <No file>                
-
-
-
-================
-=== Log Entry ===
-Timestamp: 2025-05-24 18:48:51
-Level: Info
-Message: ADグループ管理メニューを選択しました。AD管理者で操作中。
-LogDirectory: Logs/RunLogs
-CallStack: 
-Command         Arguments                                                                       Location                 
--------         ---------                                                                       --------                 
-Write-Log       {Message=ADグループ管理メニューを選択しました。AD管理者で操作中。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                                              MainCliMenu.ps1: line 250
-MainCliMenu.ps1 {}                                                                              MainCliMenu.ps1: line 488
-<ScriptBlock>   {}                                                                              <No file>                
-
-
-
-================
-=== Log Entry ===
-Timestamp: 2025-05-24 18:52:52
-Level: Info
-Message: CLIメニューを終了します。
-LogDirectory: Logs/RunLogs
-CallStack: 
-Command         Arguments                                                       Location                 
--------         ---------                                                       --------                 
-Write-Log       {Message=CLIメニューを終了します。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                              MainCliMenu.ps1: line 467
-MainCliMenu.ps1 {}                                                              MainCliMenu.ps1: line 488
-<ScriptBlock>   {}                                                              <No file>                
-
-
-
-================
-=== Log Entry ===
-Timestamp: 2025-05-24 18:55:39
-Level: Info
-Message: ADグループ管理メニューを選択しました。AD管理者で操作中。
-LogDirectory: Logs/RunLogs
-CallStack: 
-Command         Arguments                                                                       Location                 
--------         ---------                                                                       --------                 
-Write-Log       {Message=ADグループ管理メニューを選択しました。AD管理者で操作中。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                                              MainCliMenu.ps1: line 250
-MainCliMenu.ps1 {}                                                                              MainCliMenu.ps1: line 488
-<ScriptBlock>   {}                                                                              <No file>                
-
-
-
-================
-=== Log Entry ===
-Timestamp: 2025-05-24 19:22:54
-Level: Info
-Message: CLIメニューを終了します。
-LogDirectory: Logs/RunLogs
-CallStack: 
-Command         Arguments                                                       Location                 
--------         ---------                                                       --------                 
-Write-Log       {Message=CLIメニューを終了します。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                              MainCliMenu.ps1: line 467
-MainCliMenu.ps1 {}                                                              MainCliMenu.ps1: line 488
-<ScriptBlock>   {}                                                              <No file>                
-
-
-
-================
-=== Log Entry ===
-Timestamp: 2025-05-24 19:23:25
-Level: Info
-Message: ADグループ管理メニューを選択しました。AD管理者で操作中。
-LogDirectory: Logs/RunLogs
-CallStack: 
-Command         Arguments                                                                       Location                 
--------         ---------                                                                       --------                 
-Write-Log       {Message=ADグループ管理メニューを選択しました。AD管理者で操作中。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                                              MainCliMenu.ps1: line 250
-MainCliMenu.ps1 {}                                                                              MainCliMenu.ps1: line 488
-<ScriptBlock>   {}                                                                              <No file>                
-
-
-
-================
-=== Log Entry ===
-Timestamp: 2025-05-24 19:24:36
-Level: Info
-Message: Exchange Online 管理メニューを選択しました。
-LogDirectory: Logs/RunLogs
-CallStack: 
-Command         Arguments                                                                       Location                 
--------         ---------                                                                       --------                 
-Write-Log       {Message=Exchange Online 管理メニューを選択しました。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                                              MainCliMenu.ps1: line 264
-MainCliMenu.ps1 {}                                                                              MainCliMenu.ps1: line 488
-<ScriptBlock>   {}                                                                              <No file>                
-
-
-
-================
-=== Log Entry ===
-Timestamp: 2025-05-24 19:24:51
-Level: Info
-Message: CLIメニューを終了します。
-LogDirectory: Logs/RunLogs
-CallStack: 
-Command         Arguments                                                       Location                 
--------         ---------                                                       --------                 
-Write-Log       {Message=CLIメニューを終了します。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                              MainCliMenu.ps1: line 467
-MainCliMenu.ps1 {}                                                              MainCliMenu.ps1: line 488
-<ScriptBlock>   {}                                                              <No file>                
-
-
-
-================
-=== Log Entry ===
-Timestamp: 2025-05-24 19:26:39
-Level: Info
-Message: OneDrive/Teams 管理メニューを選択しました。
-LogDirectory: Logs/RunLogs
-CallStack: 
-Command         Arguments                                                                      Location                 
--------         ---------                                                                      --------                 
-Write-Log       {Message=OneDrive/Teams 管理メニューを選択しました。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                                             MainCliMenu.ps1: line 319
-MainCliMenu.ps1 {}                                                                             MainCliMenu.ps1: line 488
-<ScriptBlock>   {}                                                                             <No file>                
-
-
-
-================
-=== Log Entry ===
-Timestamp: 2025-05-24 19:27:04
-Level: Info
-Message: ライセンス管理メニューを選択しました。
-LogDirectory: Logs/RunLogs
-CallStack: 
-Command         Arguments                                                            Location                 
--------         ---------                                                            --------                 
-Write-Log       {Message=ライセンス管理メニューを選択しました。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                                   MainCliMenu.ps1: line 356
-MainCliMenu.ps1 {}                                                                   MainCliMenu.ps1: line 488
-<ScriptBlock>   {}                                                                   <No file>                
-
-
-
-================
-=== Log Entry ===
-Timestamp: 2025-05-24 19:27:21
-Level: Info
-Message: レポート生成メニューを選択しました。
-LogDirectory: Logs/RunLogs
-CallStack: 
-Command         Arguments                                                           Location                 
--------         ---------                                                           --------                 
-Write-Log       {Message=レポート生成メニューを選択しました。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                                  MainCliMenu.ps1: line 393
-MainCliMenu.ps1 {}                                                                  MainCliMenu.ps1: line 488
-<ScriptBlock>   {}                                                                  <No file>                
-
-
-
-================
-=== Log Entry ===
-Timestamp: 2025-05-24 19:28:11
-Level: Info
-Message: レポート生成メニューを選択しました。
-LogDirectory: Logs/RunLogs
-CallStack: 
-Command         Arguments                                                           Location                 
--------         ---------                                                           --------                 
-Write-Log       {Message=レポート生成メニューを選択しました。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                                  MainCliMenu.ps1: line 393
-MainCliMenu.ps1 {}                                                                  MainCliMenu.ps1: line 488
-<ScriptBlock>   {}                                                                  <No file>                
-
-
-
-================
-=== Log Entry ===
-Timestamp: 2025-05-24 19:31:17
-Level: Info
-Message: CLIメニューを終了します。
-LogDirectory: Logs/RunLogs
-CallStack: 
-Command         Arguments                                                       Location                 
--------         ---------                                                       --------                 
-Write-Log       {Message=CLIメニューを終了します。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                              MainCliMenu.ps1: line 467
-MainCliMenu.ps1 {}                                                              MainCliMenu.ps1: line 488
-<ScriptBlock>   {}                                                              <No file>                
-
-
-
-================
-=== Log Entry ===
-Timestamp: 2025-05-24 19:32:04
-Level: Info
-Message: レポート生成メニューを選択しました。
-LogDirectory: Logs/RunLogs
-CallStack: 
-Command         Arguments                                                           Location                 
--------         ---------                                                           --------                 
-Write-Log       {Message=レポート生成メニューを選択しました。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                                  MainCliMenu.ps1: line 393
-MainCliMenu.ps1 {}                                                                  MainCliMenu.ps1: line 493
-<ScriptBlock>   {}                                                                  <No file>                
-
-
-
-================
-=== Log Entry ===
-Timestamp: 2025-05-24 19:32:41
-Level: Info
-Message: CLIメニューを終了します。
-LogDirectory: Logs/RunLogs
-CallStack: 
-Command         Arguments                                                       Location                 
--------         ---------                                                       --------                 
-Write-Log       {Message=CLIメニューを終了します。, Level=Info, LogDirectory=Logs/RunLogs} Logging.ps1: line 48     
-Invoke-CliMenu  {}                                                              MainCliMenu.ps1: line 472
-MainCliMenu.ps1 {}                                                              MainCliMenu.ps1: line 493
-<ScriptBlock>   {}                                                              <No file>                
-
-
-
+PSVersion: 5.1.26100.4061
+RunAsUser: KENSANG196948\kensa
 ================

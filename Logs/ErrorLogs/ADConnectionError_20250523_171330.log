@@ -1,6 +1,0 @@
-Get-ADDomain: E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1:51
-Line |
-  51 |          Get-ADDomain -Credential $cred -ErrorAction Stop | Out-Null
-     |          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-     | Active Directory Web サービスが実行されている状態で既定のサーバーを検索することはできません。
-

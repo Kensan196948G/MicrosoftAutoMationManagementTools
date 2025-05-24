@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="2" errors="0" failures="2" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2025-05-24" time="21:52:28">
+  <environment user="kensa" machine-name="KENSANG196948" cwd="E:\MicrosoftAutoMationManagementTools" user-domain="KENSANG196948" platform="Microsoft Windows 11 Pro|C:\WINDOWS|\Device\Harddisk0\Partition3" nunit-version="2.5.8.0" os-version="10.0.26100" clr-version="4.0.30319.42000" />
+  <culture-info current-culture="ja-JP" current-uiculture="en-US" />
+  <test-suite type="Powershell" name="Pester" executed="True" result="Failure" success="False" time="0.5687" asserts="0">
+    <results>
+      <test-suite type="TestFixture" name="Error in E:\MicrosoftAutoMationManagementTools\Tests\ErrorLogging\Authentication\AUTH002.Tests.ps1" executed="True" result="Failure" success="False" time="0.2699" asserts="0" description="Error in E:\MicrosoftAutoMationManagementTools\Tests\ErrorLogging\Authentication\AUTH002.Tests.ps1">
+        <results>
+          <test-case description="Error occurred in test script 'E:\MicrosoftAutoMationManagementTools\Tests\ErrorLogging\Authentication\AUTH002.Tests.ps1'" name="Error in E:\MicrosoftAutoMationManagementTools\Tests\ErrorLogging\Authentication\AUTH002.Tests.ps1.Error occurred in test script 'E:\MicrosoftAutoMationManagementTools\Tests\ErrorLogging\Authentication\AUTH002.Tests.ps1'" time="0.2699" asserts="0" success="False" result="Failure" executed="True">
+            <failure>
+              <message>The BeforeAll command may only be used inside a Describe block.</message>
+              <stack-trace>at Assert-DescribeInProgress, C:\Program Files\WindowsPowerShell\Modules\Pester\3.4.0\Functions\Describe.ps1: line 125</stack-trace>
+            </failure>
+          </test-case>
+        </results>
+      </test-suite>
+      <test-suite type="TestFixture" name="Error in E:\MicrosoftAutoMationManagementTools\Tests\ErrorLogging\General\Concurrency.Tests.ps1" executed="True" result="Failure" success="False" time="0.2988" asserts="0" description="Error in E:\MicrosoftAutoMationManagementTools\Tests\ErrorLogging\General\Concurrency.Tests.ps1">
+        <results>
+          <test-case description="Error occurred in test script 'E:\MicrosoftAutoMationManagementTools\Tests\ErrorLogging\General\Concurrency.Tests.ps1'" name="Error in E:\MicrosoftAutoMationManagementTools\Tests\ErrorLogging\General\Concurrency.Tests.ps1.Error occurred in test script 'E:\MicrosoftAutoMationManagementTools\Tests\ErrorLogging\General\Concurrency.Tests.ps1'" time="0.2988" asserts="0" success="False" result="Failure" executed="True">
+            <failure>
+              <message>The BeforeAll command may only be used inside a Describe block.</message>
+              <stack-trace>at Assert-DescribeInProgress, C:\Program Files\WindowsPowerShell\Modules\Pester\3.4.0\Functions\Describe.ps1: line 125</stack-trace>
+            </failure>
+          </test-case>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>

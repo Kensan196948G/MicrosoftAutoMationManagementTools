@@ -8,46 +8,65 @@ function Write-Log {
         [ValidateSet("Info", "Warning", "Error", "Audit")]
         [string]$Level = "Info",
         [Parameter(Mandatory=$false)]
-        [string]$LogDirectory = "Logs"
+        [string]$BaseLogDirectory = "Logs",
+        [Parameter(Mandatory=$false)]
+        [string]$ModuleName = "System",
+        [Parameter(Mandatory=$false)]
+        [string]$ErrorCode = "NONE"
     )
 
     # グローバル設定からログディレクトリを取得（存在する場合）
     if ($global:Config -and $global:Config.LogPath) {
-        $LogDirectory = $global:Config.LogPath
+        $BaseLogDirectory = $global:Config.LogPath
     }
 
     $timestamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     $logFileName = "$(Get-Date -Format "yyyyMMdd").log"
-    $logDir = if ([string]::IsNullOrEmpty($LogDirectory)) { "Logs" } else { $LogDirectory }
+
+    # ログレベルに応じてログディレクトリを切り替え
+    switch ($Level) {
+        "Error" {
+            $logDir = Join-Path $BaseLogDirectory "ErrorLogs"
+        }
+        "Info" {
+            $logDir = Join-Path $BaseLogDirectory "RunLogs"
+        }
+        "Warning" {
+            $logDir = Join-Path $BaseLogDirectory "RunLogs"
+        }
+        "Audit" {
+            $logDir = Join-Path $BaseLogDirectory "AuditLogs"
+        }
+        default {
+            $logDir = Join-Path $BaseLogDirectory "RunLogs"
+        }
+    }
+
+    # ログファイルパス
     $logFilePath = Join-Path $logDir $logFileName
 
     try {
         # ログディレクトリが存在しない場合は作成
-        $logDir = if ([string]::IsNullOrEmpty($LogDirectory)) { "Logs" } else { $LogDirectory }
         if (-not (Test-Path $logDir)) {
             New-Item -ItemType Directory -Path $logDir -Force | Out-Null
-            # サブディレクトリも作成 (RunLogs, ErrorLogs, AuditLogs)
-            $subDirs = @("RunLogs", "ErrorLogs", "AuditLogs")
-            foreach ($subDir in $subDirs) {
-                $fullPath = Join-Path $logDir $subDir
-                if (-not (Test-Path $fullPath)) {
-                    New-Item -ItemType Directory -Path $fullPath -Force | Out-Null
-                }
-            }
         }
 
-        # ログエントリの作成
-        $logEntry = "[$timestamp] [$Level] $Message"
+        # ログエントリの作成（新しいフォーマット）
+        $logEntry = "[$(Get-Date -Format 'yyyy/MM/dd HH:mm')] [$Level] [$ModuleName] [$ErrorCode] $Message"
 
         # 詳細なログ書き込み
         $logDetails = @(
-            "Timestamp: $timestamp",
+            "Timestamp: $(Get-Date -Format 'yyyy/MM/dd HH:mm:ss')",
             "Level: $Level",
+            "Module: $ModuleName",
+            "ErrorCode: $ErrorCode",
             "Message: $Message",
             "LogDirectory: $logDir",
-            "CallStack: $(Get-PSCallStack | Out-String)"
+            "CallStack: $(Get-PSCallStack | Out-String)",
+            "PSVersion: $($PSVersionTable.PSVersion)",
+            "RunAsUser: $([System.Security.Principal.WindowsIdentity]::GetCurrent().Name)"
         ) -join "`n"
-        
+
         if (-not [string]::IsNullOrEmpty($logFilePath)) {
             Add-Content -Path $logFilePath -Value "=== Log Entry ==="
             Add-Content -Path $logFilePath -Value $logDetails
@@ -63,7 +82,3 @@ function Write-Log {
         Write-Error "Failed to write log to ${logFilePath}: ${errorMessage}"
     }
 }
-
-# TODO: ログファイルパスの管理（実行ログ、エラーログ、監査ログ）を区別
-# TODO: CSV/HTML形式でのログ出力対応
-# TODO: ログの保存期間管理（Cleaningジョブを別途作成するか、本モジュールに含めるか検討）
