@@ -1,0 +1,6 @@
+﻿Error Message: Unable to find a default server with Active Directory Web Services running.
+Stack Trace:
+at Connect-ADAdmin, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 75
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 148
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 208
+at <ScriptBlock>, <No file>: line 1

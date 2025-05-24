@@ -1,4 +1,4 @@
-# Microsoft製品運用自動化ツール 運用ガイド
+# Microsoft製品運用自動化ツール 運用ガイド (v2.2)
 
 ## 1. 概要
 本運用ガイドは、Microsoft 365および関連サービスの管理業務を自動化するためのツール運用について説明します。
@@ -37,30 +37,9 @@
 ### 5.3. ログのアーカイブと削除
 古いログファイルのアーカイブと削除手順について説明します。
 
-## Active Directory PowerShellリモート管理の注意点 (v2.1)
+## 6. 関連ドキュメント
 
-- **基本要件**:
-  - ADWS (Active Directory Web Services) を起動する際は、必ず管理者権限でPowerShellを実行
-  - RSAT (Remote Server Administration Tools) の導入はWindowsのバージョンに依存
-
-- **セキュリティ要件**:
-  - SSL/TLS 1.2以上が必須 (詳細は[セキュリティ設計書](AD_Connection_Security_Design.md)参照)
-  - 基本認証無効化、Kerberos認証推奨
-  - 5986ポート(HTTPS)を使用
-
-- **トラブルシューティング**:
-  - よくあるエラー例と対処法: `Docs/Active Directory PowerShellリモート管理・操作 詳細手順書.txt` 参照
-  - 接続テストコマンド:
-    ```powershell
-    Test-WSMan -ComputerName <サーバー> -UseSSL -Authentication Kerberos
-    ```
-
-- **実行例**:
-  ```powershell
-  # 推奨形式 (v2.1)
-  Invoke-Command -ComputerName <サーバー> -UseSSL -Authentication Kerberos -ScriptBlock { <コマンド> }
-  ```
-
-```powershell
-Invoke-Command -ComputerName <サーバー名> -ScriptBlock { <コマンド> }
-```
+- [Active Directory接続セキュリティ設計書](Docs/AD_Connection_Security_Design.md)
+- [Active Directory PowerShellリモート管理手順書](Docs/Active%20Directory%20PowerShell%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E7%AE%A1%E7%90%86%E3%83%BB%E6%93%8D%E4%BD%9C%20%E8%A9%B3%E7%B4%B0%E6%89%8B%E9%A0%86%E6%9B%B8.txt)
+- [ITSM/M365ツール仕様書](Docs/ITSM_M365_Tool_Spec.md)
+- [セキュリティポリシー](Docs/SecurityPolicy.md)

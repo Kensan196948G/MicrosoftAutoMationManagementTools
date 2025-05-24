@@ -82,8 +82,15 @@ function Set-User {
             Set-ADUser -Identity $UserName @properties -ErrorAction Stop
         }
 
+        # AD接続情報を取得
+        $securePassword = ConvertTo-SecureString $Credential.Password -AsPlainText -Force
+        $adCredential = New-Object System.Management.Automation.PSCredential(
+            $Credential.User,
+            $securePassword
+        )
+        
         Invoke-ADCommand -ScriptBlock $scriptBlock -ArgumentList $UserName, $properties `
-                        -Credential $Credential -Server $Server -SessionOptions $SessionOptions
+                        -Credential $adCredential -Server $Server -SessionOptions $SessionOptions
         
         Write-Log -Message "ユーザー情報を更新しました: $UserName" -Level "Audit" -LogDirectory $global:Config.LogPath
     }

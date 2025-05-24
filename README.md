@@ -1,4 +1,4 @@
-# Microsoft製品運用自動化ツール (v2.1)
+# Microsoft製品運用自動化ツール (v2.2)
 
 ## 概要
 - **セキュリティ強化**:
@@ -8,7 +8,7 @@
 
 本ツールは、Microsoft 365, Entra ID (旧 Azure AD), Exchange Online の管理業務を自動化し、ITSMプラクティスとISO27001/27002の統制要件に準拠することを目的としています。PowerShellベースで開発されており、各種管理タスクの効率化とセキュリティ強化に貢献します。
 
-## 主要機能
+## 主要機能 (v2.2更新)
 - **CLIメニュー:** PowerShellプロンプト上で対話的に操作できるCLIメニューを提供し、各機能へのアクセスを容易にします。
 - **Coreモジュール:** 認証、ログ管理、エラー処理などの基盤機能を提供します。
 - **機能モジュール:** ユーザー管理、グループ管理、Exchange Online管理、OneDrive/Teams管理、ライセンス管理など、多岐にわたる自動化機能を提供します。
@@ -58,7 +58,8 @@ MicrosoftAutoMationManagementTools/
 │
 ├── 📂 Config/                      # 設定ファイル
 │   ├── config.json
-│   └── secrets.enc.json            # ※現在利用していません。ClientSecretは実行時に入力します。
+│   ├── secrets.enc.json            # 暗号化された認証情報 (AES-256)
+│   └── secrets.enc.template.json   # テンプレートファイル
 │
 ├── 📂 Docs/                        # 各種仕様書・手順書
 │   ├── ITSM_M365_Tool_Spec.md
@@ -84,10 +85,10 @@ MicrosoftAutoMationManagementTools/
 2. 必要なPowerShellモジュールのインストール (Microsoft.Graph, ExchangeOnlineManagement, MicrosoftTeams)
 3. Entra IDでのアプリケーション登録とAPI権限構成
 4. `Config/config.json`の設定
-5. ツール実行時、Client Secretはプロンプトで入力してください。(secrets.enc.jsonは現在使用していません。)
+5. `Config/secrets.enc.json`の設定 (AES-256暗号化推奨)
 6. 環境に合わせたタスクスケジューラの設定
  
-詳細な導入手順は `Docs/Installation_Guide.pdf` または `Docs/Operation_Guide.md` を参照してください。
+詳細な導入手順は `Docs/Operation_Guide.md` を参照してください。
 
 ## 貢献
 本プロジェクトへの貢献を歓迎します。詳細については、CONTRIBUTING.md を参照してください。
@@ -96,11 +97,11 @@ MicrosoftAutoMationManagementTools/
 ## ライセンス
 このプロジェクトは、MITライセンスの下で公開されています。
 
-## Active Directory PowerShellリモート管理について
+## 関連ドキュメント
 
-本ツールのActive Directory PowerShellリモート管理機能を利用する際は、以下の点にご注意ください。
+- [Active Directory接続セキュリティ設計書](Docs/AD_Connection_Security_Design.md)
+- [Active Directory PowerShellリモート管理手順書](Docs/Active%20Directory%20PowerShell%E3%83%AA%E3%83%A2%E3%83%BC%E3%83%88%E7%AE%A1%E7%90%86%E3%83%BB%E6%93%8D%E4%BD%9C%20%E8%A9%B3%E7%B4%B0%E6%89%8B%E9%A0%86%E6%9B%B8.txt)
+- [ITSM/M365ツール仕様書](Docs/ITSM_M365_Tool_Spec.md)
+- [運用ガイド](Docs/Operation_Guide.md)
+- [セキュリティポリシー](Docs/SecurityPolicy.md)
 
-- ADWS (Active Directory Web Services) を起動する際は、必ず管理者権限でPowerShellを実行してください。権限不足により接続エラーが発生する場合があります。
-- RSAT (Remote Server Administration Tools) の導入はWindowsのバージョンに依存します。Windows 10/11のバージョンに応じたRSATのインストールを行ってください。
-- よくあるエラー例と対処法については、Docs/Active Directory PowerShellリモート管理・操作 詳細手順書.txtを参照してください。
-- リモートコマンドの実行例は表記を統一しており、`Invoke-Command -ComputerName <サーバー名> -ScriptBlock { <コマンド> }` の形式を推奨しています。

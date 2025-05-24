@@ -1,11 +1,23 @@
 # Core/Configuration.ps1
 
+# テスト環境用の簡易ログ関数
+if (-not (Get-Command Write-Log -ErrorAction SilentlyContinue)) {
+    function Write-Log {
+        param(
+            [string]$Message,
+            [string]$Level,
+            [string]$LogDirectory
+        )
+        Write-Host "[$Level] $Message"
+    }
+}
+
 # DPAPIを使用するために必要なアセンブリをロード
 try {
     Add-Type -AssemblyName System.Security
 }
 catch {
-    Write-Log -Message "System.Securityアセンブリのロードに失敗: $($_.Exception.Message)" -Level "Error" -LogDirectory $global:Config.ErrorLogPath
+    Write-Log -Message "System.Securityアセンブリのロードに失敗: $($_.Exception.Message)" -Level "Error" -LogDirectory "Logs/ErrorLogs"
     throw
 }
 
@@ -31,53 +43,48 @@ function Get-Configuration {
     }
 }
 
-# function Get-SecureSecrets {
-#     param(
-#         [Parameter(Mandatory=$true)]
-#         [string]$SecretsFilePath,
-#         [Parameter(Mandatory=$true)]
-#         [string]$EncryptionKey
-#     )
+function Get-SecureSecrets {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$SecretsFilePath,
+        [Parameter(Mandatory=$false)]
+        [string]$EncryptionKey = $env:CONFIG_ENCRYPTION_KEY
+    )
 
-#     try {
-#         if (-not (Test-Path $SecretsFilePath)) {
-#             Write-Error "Secrets file not found: $SecretsFilePath"
-#             return $null
-#         }
+    try {
+        if (-not (Test-Path $SecretsFilePath)) {
+            Write-Error "Secrets file not found: $SecretsFilePath"
+            return $null
+        }
 
-#         $secretsFileContent = Get-Content $SecretsFilePath | ConvertFrom-Json
-#         $encryptedClientSecretValue = $secretsFileContent.ClientSecret
-#         $decryptedJson = Convert-ToDecryptedString -EncryptedString $encryptedClientSecretValue -EncryptionKey $EncryptionKey
-
-#         if ($null -eq $decryptedJson) {
-#             Write-Error "Failed to decrypt secrets from $SecretsFilePath."
-#             return $null
-#         }
-
-#         # 複合化したJSON文字列をオブジェクトに変換
-#         $secretsContent = $decryptedJson | ConvertFrom-Json
+        $secretsFileContent = Get-Content $SecretsFilePath | ConvertFrom-Json
         
-#         $secureSecrets = @{}
-#         foreach ($key in $secretsContent.PSObject.Properties.Name) {
-#             # ClientSecretをSecureStringに変換
-#             $secureSecrets[$key] = ($secretsContent.$key | ConvertTo-SecureString -AsPlainText -Force)
-#         }
-#         Write-Host "Successfully loaded and secured secrets from $SecretsFilePath."
-#         return $secureSecrets
-#     }
-#     catch {
-#         $errorMessage = $_.Exception.Message
-#         Write-Error "Failed to load or secure secrets from ${SecretsFilePath}: ${errorMessage}"
-#         return $null
-#     }
-# }
- 
+        # ClientSecretの復号
+        $decryptedSecret = ConvertFrom-EncryptedString -EncryptedString $secretsFileContent.ClientSecret -EncryptionKey $EncryptionKey
+        
+        $secureSecrets = @{
+            ClientSecret = $decryptedSecret | ConvertTo-SecureString -AsPlainText -Force
+            AdminUPN = $secretsFileContent.AdminUPN
+        }
+
+        Write-Log -Message "Successfully loaded and secured secrets from $SecretsFilePath" -Level "Info" -LogDirectory $global:Config.LogPath
+        return $secureSecrets
+    }
+    catch {
+        Write-Log -Message "Failed to load or secure secrets from ${SecretsFilePath}: $($_.Exception.Message)" -Level "Error" -LogDirectory $global:Config.ErrorLogPath
+        return $null
+    }
+}
+
 function ConvertTo-EncryptedString {
     param(
         [Parameter(Mandatory=$true)]
         [string]$String,
         [Parameter(Mandatory=$false)]
-        [string]$EncryptionKey = $env:CONFIG_ENCRYPTION_KEY
+        [string]$EncryptionKey = $env:CONFIG_ENCRYPTION_KEY,
+        [Parameter(Mandatory=$false)]
+        [ValidateSet('DPAPI','AES')]
+        [string]$Algorithm = 'DPAPI'
     )
     
     try {
@@ -85,29 +92,50 @@ function ConvertTo-EncryptedString {
             throw "暗号化キーが指定されていません。環境変数CONFIG_ENCRYPTION_KEYを設定してください。"
         }
 
-        $bytesToEncrypt = [System.Text.Encoding]::UTF8.GetBytes($String)
-        $entropyBytes = [System.Text.Encoding]::UTF8.GetBytes($EncryptionKey)
-        
-        $encryptedBytes = [System.Security.Cryptography.ProtectedData]::Protect(
-            $bytesToEncrypt,
-            $entropyBytes,
-            [System.Security.Cryptography.DataProtectionScope]::CurrentUser
-        )
-        
-        return [System.Convert]::ToBase64String($encryptedBytes)
+        switch ($Algorithm) {
+            'DPAPI' {
+                $bytesToEncrypt = [System.Text.Encoding]::UTF8.GetBytes($String)
+                $entropyBytes = [System.Text.Encoding]::UTF8.GetBytes($EncryptionKey)
+                
+                $encryptedBytes = [System.Security.Cryptography.ProtectedData]::Protect(
+                    $bytesToEncrypt,
+                    $entropyBytes,
+                    [System.Security.Cryptography.DataProtectionScope]::CurrentUser
+                )
+                return [System.Convert]::ToBase64String($encryptedBytes)
+            }
+            'AES' {
+                $aes = [System.Security.Cryptography.Aes]::Create()
+                $aes.Key = [System.Text.Encoding]::UTF8.GetBytes($EncryptionKey.PadRight(32).Substring(0,32))
+                $aes.IV = [System.Text.Encoding]::UTF8.GetBytes($EncryptionKey.PadRight(16).Substring(0,16))
+                
+                $encryptor = $aes.CreateEncryptor()
+                $memoryStream = New-Object System.IO.MemoryStream
+                $cryptoStream = New-Object System.Security.Cryptography.CryptoStream($memoryStream, $encryptor, [System.Security.Cryptography.CryptoStreamMode]::Write)
+                
+                $streamWriter = New-Object System.IO.StreamWriter($cryptoStream)
+                $streamWriter.Write($String)
+                $streamWriter.Close()
+                
+                return [System.Convert]::ToBase64String($memoryStream.ToArray())
+            }
+        }
     }
     catch {
         Write-Log -Message "文字列の暗号化に失敗: $($_.Exception.Message)" -Level "Error" -LogDirectory $global:Config.ErrorLogPath
         throw
     }
 }
- 
+
 function ConvertFrom-EncryptedString {
     param(
         [Parameter(Mandatory=$true)]
         [string]$EncryptedString,
         [Parameter(Mandatory=$false)]
-        [string]$EncryptionKey = $env:CONFIG_ENCRYPTION_KEY
+        [string]$EncryptionKey = $env:CONFIG_ENCRYPTION_KEY,
+        [Parameter(Mandatory=$false)]
+        [ValidateSet('DPAPI','AES')]
+        [string]$Algorithm = 'DPAPI'
     )
     
     try {
@@ -115,23 +143,47 @@ function ConvertFrom-EncryptedString {
             throw "復号キーが指定されていません。環境変数CONFIG_ENCRYPTION_KEYを設定してください。"
         }
 
-        $encryptedBytes = [System.Convert]::FromBase64String($EncryptedString)
-        $entropyBytes = [System.Text.Encoding]::UTF8.GetBytes($EncryptionKey)
-        
-        $decryptedBytes = [System.Security.Cryptography.ProtectedData]::Unprotect(
-            $encryptedBytes,
-            $entropyBytes,
-            [System.Security.Cryptography.DataProtectionScope]::CurrentUser
-        )
-        
-        return [System.Text.Encoding]::UTF8.GetString($decryptedBytes)
+        switch ($Algorithm) {
+            'DPAPI' {
+                $encryptedBytes = [System.Convert]::FromBase64String($EncryptedString)
+                $entropyBytes = [System.Text.Encoding]::UTF8.GetBytes($EncryptionKey)
+                
+                $decryptedBytes = [System.Security.Cryptography.ProtectedData]::Unprotect(
+                    $encryptedBytes,
+                    $entropyBytes,
+                    [System.Security.Cryptography.DataProtectionScope]::CurrentUser
+                )
+                return [System.Text.Encoding]::UTF8.GetString($decryptedBytes)
+            }
+            'AES' {
+                try {
+                    $aes = [System.Security.Cryptography.Aes]::Create()
+                    $aes.Key = [System.Text.Encoding]::UTF8.GetBytes($EncryptionKey.PadRight(32).Substring(0,32))
+                    $aes.IV = [System.Text.Encoding]::UTF8.GetBytes($EncryptionKey.PadRight(16).Substring(0,16))
+                    
+                    $decryptor = $aes.CreateDecryptor()
+                    $encryptedBytes = [System.Convert]::FromBase64String($EncryptedString)
+                    $memoryStream = New-Object System.IO.MemoryStream @(,$encryptedBytes)
+                    $cryptoStream = New-Object System.Security.Cryptography.CryptoStream($memoryStream, $decryptor, [System.Security.Cryptography.CryptoStreamMode]::Read)
+                    
+                    $streamReader = New-Object System.IO.StreamReader($cryptoStream)
+                    return $streamReader.ReadToEnd()
+                }
+                finally {
+                    if ($aes -ne $null) { $aes.Dispose() }
+                    if ($memoryStream -ne $null) { $memoryStream.Dispose() }
+                    if ($cryptoStream -ne $null) { $cryptoStream.Dispose() }
+                    if ($streamReader -ne $null) { $streamReader.Dispose() }
+                }
+            }
+        }
     }
     catch {
         Write-Log -Message "文字列の復号に失敗: $($_.Exception.Message)" -Level "Error" -LogDirectory $global:Config.ErrorLogPath
         throw
     }
 }
- 
+
 function New-SecureConfigTemplate {
     param(
         [Parameter(Mandatory=$true)]
@@ -176,4 +228,43 @@ function New-SecureConfigTemplate {
     }
 }
 
-# Export-ModuleMember -Function Get-Configuration, Get-SecureSecrets, ConvertTo-EncryptedString, ConvertFrom-EncryptedString, New-SecureConfigTemplate
+function Rotate-EncryptionKey {
+    param(
+        [Parameter(Mandatory=$true)]
+        [string]$OldKey,
+        [Parameter(Mandatory=$true)]
+        [string]$NewKey,
+        [Parameter(Mandatory=$false)]
+        [ValidateSet('DPAPI','AES')]
+        [string]$Algorithm = 'DPAPI'
+    )
+
+    try {
+        # 既存のsecrets.enc.jsonを読み込み
+        $secretsPath = Join-Path $PSScriptRoot "../Config/secrets.enc.json"
+        if (-not (Test-Path $secretsPath)) {
+            throw "secrets.enc.jsonが見つかりません"
+        }
+
+        $secretsContent = Get-Content $secretsPath | ConvertFrom-Json
+        
+        # 古い鍵で復号
+        $decryptedSecret = ConvertFrom-EncryptedString -EncryptedString $secretsContent.ClientSecret -EncryptionKey $OldKey -Algorithm $Algorithm
+        
+        # 新しい鍵で再暗号化
+        $newEncrypted = ConvertTo-EncryptedString -String $decryptedSecret -EncryptionKey $NewKey -Algorithm $Algorithm
+        
+        # 更新した内容を保存
+        $secretsContent.ClientSecret = $newEncrypted
+        $secretsContent | ConvertTo-Json | Out-File $secretsPath -Encoding UTF8
+        
+        Write-Log -Message "暗号鍵のローテーションが完了しました" -Level "Info" -LogDirectory "Logs"
+        return $true
+    }
+    catch {
+        Write-Log -Message "暗号鍵のローテーションに失敗: $($_.Exception.Message)" -Level "Error" -LogDirectory "Logs/ErrorLogs"
+        return $false
+    }
+}
+
+# Export-ModuleMember -Function Get-Configuration, Get-SecureSecrets, ConvertTo-EncryptedString, ConvertFrom-EncryptedString, New-SecureConfigTemplate, Rotate-EncryptionKey

@@ -1,0 +1,7 @@
+﻿Get-ADDomain : Unable to find a default server with Active Directory Web Services running.
+At E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1:75 char:17
++ ...              Get-ADDomain -Credential $cred -ErrorAction Stop | Out-N ...
++                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ResourceUnavailable: (KENSANG196948:ADDomain) [Get-ADDomain], ADServerDownException
+    + FullyQualifiedErrorId : ActiveDirectoryServer:1355,Microsoft.ActiveDirectory.Management.Commands.GetADDomain
+ 

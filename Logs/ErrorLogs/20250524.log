@@ -1,0 +1,206 @@
+[2025-05-24 16:11:28] [Error] 認証処理失敗: Cannot bind argument to parameter 'LogDirectory' because it is an empty string.
+[2025-05-24 16:15:57] [Error] 認証処理失敗: Cannot bind argument to parameter 'LogDirectory' because it is an empty string.
+[2025-05-24 16:42:37] [Error] 認証処理失敗: Cannot bind argument to parameter 'LogDirectory' because it is an empty string.
+[2025-05-24 16:44:41] [Error] 認証処理失敗: Cannot bind argument to parameter 'LogDirectory' because it is an empty string.
+[2025-05-24 16:45:55] [Error] 認証処理失敗: Cannot bind argument to parameter 'Path' because it is an empty string.
+[2025-05-24 16:47:21] [Error] 認証処理失敗: Failed to write log to Logs\20250524.log: Cannot bind argument to parameter 'Path' because it is an empty string.
+[2025-05-24 16:48:52] [Error] 認証失敗: A parameter cannot be found that matches parameter name 'AsPlainText'.
+[2025-05-24 16:48:52] [Error] 認証処理失敗: A parameter cannot be found that matches parameter name 'AsPlainText'.
+[2025-05-24 16:50:26] [Error] 認証失敗: The remote server returned an error: (401) Unauthorized.
+[2025-05-24 16:50:26] [Error] 認証処理失敗: The remote server returned an error: (401) Unauthorized.
+[2025-05-24 16:52:47] [Error] 認証失敗: The remote server returned an error: (401) Unauthorized.
+[2025-05-24 16:52:47] [Error] 認証処理失敗: The remote server returned an error: (401) Unauthorized.
+[2025-05-24 16:55:32] [Error] 認証失敗: The remote server returned an error: (401) Unauthorized.
+[2025-05-24 16:55:32] [Error] 認証処理失敗: The remote server returned an error: (401) Unauthorized.
+[2025-05-24 16:58:44] [Error] 認証失敗: The remote server returned an error: (401) Unauthorized.
+[2025-05-24 16:58:44] [Error] 認証処理失敗: The remote server returned an error: (401) Unauthorized.
+=== Log Entry ===
+Timestamp: 2025-05-24 18:24:07
+Level: Error
+Message: CLIメニュー処理中にエラーが発生しました。 - Original Error: The term 'Invoke-ExchangeManagementMenu' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+LogDirectory: Logs/ErrorLogs
+CallStack: 
+Command            Arguments                                                                                                                          
+-------            ---------                                                                                                                          
+Write-Log          {Message=CLIメニュー処理中にエラーが発生しました。 - Original Error: The term 'Invoke-ExchangeManagementMenu' is not recognized as the name of a cm...
+Handle-ScriptError {ErrorRecord=The term 'Invoke-ExchangeManagementMenu' is not recognized as the name of a cmdlet, function, script file, or opera...
+Invoke-CliMenu     {}                                                                                                                                 
+MainCliMenu.ps1    {}                                                                                                                                 
+<ScriptBlock>      {}                                                                                                                                 
+
+
+
+================
+=== Log Entry ===
+Timestamp: 2025-05-24 18:24:07
+Level: Error
+Message: StackTrace: at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 251
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 291
+at <ScriptBlock>, <No file>: line 1
+LogDirectory: Logs/ErrorLogs
+CallStack: 
+Command            Arguments                                                                                                                          
+-------            ---------                                                                                                                          
+Write-Log          {Message=StackTrace: at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 251...                         
+Handle-ScriptError {ErrorRecord=The term 'Invoke-ExchangeManagementMenu' is not recognized as the name of a cmdlet, function, script file, or opera...
+Invoke-CliMenu     {}                                                                                                                                 
+MainCliMenu.ps1    {}                                                                                                                                 
+<ScriptBlock>      {}                                                                                                                                 
+
+
+
+================
+=== Log Entry ===
+Timestamp: 2025-05-24 18:24:08
+Level: Error
+Message: Error Category: ObjectNotFound
+LogDirectory: Logs/ErrorLogs
+CallStack: 
+Command            Arguments                                                                                                                          
+-------            ---------                                                                                                                          
+Write-Log          {Message=Error Category: ObjectNotFound, Level=Error, LogDirectory=Logs/ErrorLogs}                                                 
+Handle-ScriptError {ErrorRecord=The term 'Invoke-ExchangeManagementMenu' is not recognized as the name of a cmdlet, function, script file, or opera...
+Invoke-CliMenu     {}                                                                                                                                 
+MainCliMenu.ps1    {}                                                                                                                                 
+<ScriptBlock>      {}                                                                                                                                 
+
+
+
+================
+=== Log Entry ===
+Timestamp: 2025-05-24 18:33:44
+Level: Error
+Message: 認証失敗: The remote server returned an error: (401) Unauthorized.
+LogDirectory: Logs/ErrorLogs
+CallStack: 
+Command              Arguments                                                                                                             Location   
+-------              ---------                                                                                                             --------   
+Write-Log            {Message=認証失敗: The remote server returned an error: (401) Unauthorized., Level=Error, LogDirectory=Logs/ErrorLogs}    Logging....
+Get-UnifiedAuthToken {AuthType=Graph, Credential=System.Management.Automation.PSCredential, TenantId=a7232f7a-a9e5-4f71-9372-dc8b1c6645ea} Authenti...
+MainCliMenu.ps1      {}                                                                                                                    MainCliM...
+<ScriptBlock>        {}                                                                                                                    <No file>  
+
+
+
+================
+=== Log Entry ===
+Timestamp: 2025-05-24 18:33:44
+Level: Error
+Message: 認証処理失敗: The remote server returned an error: (401) Unauthorized.
+LogDirectory: Logs/ErrorLogs
+CallStack: 
+Command         Arguments                                                                                                            Location         
+-------         ---------                                                                                                            --------         
+Write-Log       {Message=認証処理失敗: The remote server returned an error: (401) Unauthorized., Level=Error, LogDirectory=Logs/ErrorLogs} Logging.ps1: l...
+MainCliMenu.ps1 {}                                                                                                                   MainCliMenu.ps...
+<ScriptBlock>   {}                                                                                                                   <No file>        
+
+
+
+================
+=== Log Entry ===
+Timestamp: 2025-05-24 18:47:25
+Level: Error
+Message: CLIメニュー処理中にエラーが発生しました。 - Original Error: Cannot process argument transformation on parameter 'ConnectionInfo'. Cannot convert the "" value of type "System.String" to type "System.Collections.Hashtable".
+LogDirectory: Logs/ErrorLogs
+CallStack: 
+Command            Arguments                                                                                                                          
+-------            ---------                                                                                                                          
+Write-Log          {Message=CLIメニュー処理中にエラーが発生しました。 - Original Error: Cannot process argument transformation on parameter 'ConnectionInfo'. Cannot c...
+Handle-ScriptError {ErrorRecord=Cannot process argument transformation on parameter 'ConnectionInfo'. Cannot convert the "" value of type "System.S...
+Invoke-CliMenu     {}                                                                                                                                 
+MainCliMenu.ps1    {}                                                                                                                                 
+<ScriptBlock>      {}                                                                                                                                 
+
+
+
+================
+=== Log Entry ===
+Timestamp: 2025-05-24 18:47:25
+Level: Error
+Message: StackTrace: at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 246
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 476
+at <ScriptBlock>, <No file>: line 1
+LogDirectory: Logs/ErrorLogs
+CallStack: 
+Command            Arguments                                                                                                                          
+-------            ---------                                                                                                                          
+Write-Log          {Message=StackTrace: at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 246...                         
+Handle-ScriptError {ErrorRecord=Cannot process argument transformation on parameter 'ConnectionInfo'. Cannot convert the "" value of type "System.S...
+Invoke-CliMenu     {}                                                                                                                                 
+MainCliMenu.ps1    {}                                                                                                                                 
+<ScriptBlock>      {}                                                                                                                                 
+
+
+
+================
+=== Log Entry ===
+Timestamp: 2025-05-24 18:47:25
+Level: Error
+Message: Error Category: InvalidData
+LogDirectory: Logs/ErrorLogs
+CallStack: 
+Command            Arguments                                                                                                                          
+-------            ---------                                                                                                                          
+Write-Log          {Message=Error Category: InvalidData, Level=Error, LogDirectory=Logs/ErrorLogs}                                                    
+Handle-ScriptError {ErrorRecord=Cannot process argument transformation on parameter 'ConnectionInfo'. Cannot convert the "" value of type "System.S...
+Invoke-CliMenu     {}                                                                                                                                 
+MainCliMenu.ps1    {}                                                                                                                                 
+<ScriptBlock>      {}                                                                                                                                 
+
+
+
+================
+=== Log Entry ===
+Timestamp: 2025-05-24 19:24:43
+Level: Error
+Message: CLIメニュー処理中にエラーが発生しました。 - Original Error: The term 'Get-MailboxUsage' is not recognized as the name of a cmdlet, function, script file, or operable program. Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+LogDirectory: Logs/ErrorLogs
+CallStack: 
+Command            Arguments                                                                                                                          
+-------            ---------                                                                                                                          
+Write-Log          {Message=CLIメニュー処理中にエラーが発生しました。 - Original Error: The term 'Get-MailboxUsage' is not recognized as the name of a cmdlet, functio...
+Handle-ScriptError {ErrorRecord=The term 'Get-MailboxUsage' is not recognized as the name of a cmdlet, function, script file, or operable program. ...
+Invoke-CliMenu     {}                                                                                                                                 
+MainCliMenu.ps1    {}                                                                                                                                 
+<ScriptBlock>      {}                                                                                                                                 
+
+
+
+================
+=== Log Entry ===
+Timestamp: 2025-05-24 19:24:43
+Level: Error
+Message: StackTrace: at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 284
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 488
+at <ScriptBlock>, <No file>: line 1
+LogDirectory: Logs/ErrorLogs
+CallStack: 
+Command            Arguments                                                                                                                          
+-------            ---------                                                                                                                          
+Write-Log          {Message=StackTrace: at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 284...                         
+Handle-ScriptError {ErrorRecord=The term 'Get-MailboxUsage' is not recognized as the name of a cmdlet, function, script file, or operable program. ...
+Invoke-CliMenu     {}                                                                                                                                 
+MainCliMenu.ps1    {}                                                                                                                                 
+<ScriptBlock>      {}                                                                                                                                 
+
+
+
+================
+=== Log Entry ===
+Timestamp: 2025-05-24 19:24:43
+Level: Error
+Message: Error Category: ObjectNotFound
+LogDirectory: Logs/ErrorLogs
+CallStack: 
+Command            Arguments                                                                                                                          
+-------            ---------                                                                                                                          
+Write-Log          {Message=Error Category: ObjectNotFound, Level=Error, LogDirectory=Logs/ErrorLogs}                                                 
+Handle-ScriptError {ErrorRecord=The term 'Get-MailboxUsage' is not recognized as the name of a cmdlet, function, script file, or operable program. ...
+Invoke-CliMenu     {}                                                                                                                                 
+MainCliMenu.ps1    {}                                                                                                                                 
+<ScriptBlock>      {}                                                                                                                                 
+
+
+
+================

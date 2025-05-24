@@ -1,4 +1,4 @@
-# ITSM/ISO27001/27002準拠 Microsoft製品運用自動化ツール 仕様書 (仮)
+# ITSM/ISO27001/27002準拠 Microsoft製品運用自動化ツール 仕様書 (v2.2)
 
 ## 1. 目的と背景
 Microsoft 365, Entra ID, Exchange Online の管理業務自動化ツールに関する仕様書です。
@@ -24,10 +24,25 @@ ITSM実践とISO27001/27002の統制要件を満たすことを目的としま�
 - 運用ツールメニュー: CLIメニュー構成
 
 ## 5. 実装機能マトリクス
-(詳細は別途記載)
+| 機能カテゴリ | 実装モジュール | 対応API |
+|--------------|----------------|---------|
+| ユーザー管理 | UserManagement.ps1 | Microsoft Graph API |
+| グループ管理 | GroupManagement.ps1 | Microsoft Graph API |
+| Exchange管理 | ExchangeManagement.ps1 | Exchange Online PowerShell |
+| Teams管理 | TeamsManagement.ps1 | Microsoft Teams PowerShell |
+| OneDrive管理 | OneDriveManagement.ps1 | SharePoint Online PowerShell |
+| ライセンス管理 | LicenseManagement.ps1 | Microsoft Graph API |
 
 ## 6. レポート・通知機能
-(詳細は別途記載)
+- **レポート種類**:
+  - 日次: ユーザー作成/削除、ライセンス変更
+  - 週次: グループメンバーシップ変更
+  - 月次: コンプライアンス状況
+  - 年次: 包括的な監査レポート
+- **通知方法**:
+  - メール通知 (SMTP)
+  - Webhook通知 (ITSMシステム連携)
+  - Syslog転送 (SIEM連携)
 
 ## 7. 外部連携
 - ITSMシステム (REST API)
@@ -41,19 +56,31 @@ ITSM実践とISO27001/27002の統制要件を満たすことを目的としま�
 - 出力形式: テキスト/CSV/HTML
 
 ## 9. 導入・運用ガイドライン
-(詳細は別途記載)
+- **導入前準備**:
+  - 環境調査と要件定義
+  - 必要なPowerShellモジュールのインストール
+  - 認証情報の準備
+- **導入手順**:
+  - 設定ファイル(config.json)の作成
+  - スクリプトの配置
+  - テスト実行
+- **運用ガイドライン**:
+  - 定期メンテナンススケジュール
+  - バックアップ戦略
+  - 障害対応フロー
 
 ## 10. フォルダ構造
 ```
 MicrosoftAutoMationManagementTools/
-├── Core/
-├── Modules/
-├── Reports/
-├── Scheduler/
-├── Logs/
-├── Templates/
-├── Config/
-├── Docs/
-├── Integrations/
-├── Tools/
-└── README.md
+├── 📂 Core/                         # 認証・設定・ログ・エラー処理
+├── 📂 Modules/                      # 各業務機能モジュール
+├── 📂 Reports/                      # レポート出力（自動生成）
+├── 📂 Scheduler/                    # スケジュール・自動実行
+├── 📂 Logs/                         # ログ管理（ISO準拠）
+├── 📂 Templates/                    # HTML・CSVテンプレート
+├── 📂 Config/                       # 設定ファイル
+├── 📂 Docs/                         # 各種仕様書・手順書
+├── 📂 Integrations/                 # 外部連携モジュール
+├── 📂 Tools/                        # メンテナンス用スクリプト
+├── MainCliMenu.ps1                  # CLIメニュー
+└── README.md                        # 全体概要

@@ -53,13 +53,15 @@ function Get-UnifiedAuthToken {
             }
         }
 
-        # ログ出力
-        Write-Log -Message "認証成功: $AuthType" -Level "Audit" -LogDirectory $global:Config.LogPath
+        # ログ出力（$global:Configがnullの場合のフォールバック処理）
+        $logDir = if ($global:Config -and $global:Config.LogPath) { $global:Config.LogPath } else { "Logs" }
+        Write-Log -Message "認証成功: $AuthType" -Level "Audit" -LogDirectory $logDir
         
         return $token
     }
     catch {
-        Write-Log -Message "認証失敗: $($_.Exception.Message)" -Level "Error" -LogDirectory $global:Config.ErrorLogPath
+        $errorDir = if ($global:Config -and $global:Config.ErrorLogPath) { $global:Config.ErrorLogPath } else { "Logs/ErrorLogs" }
+        Write-Log -Message "認証失敗: $($_.Exception.Message)" -Level "Error" -LogDirectory $errorDir
         throw
     }
 }
@@ -78,7 +80,9 @@ function Get-M365GraphToken {
 
     $token = [AuthToken]::new()
     try {
-        $clientSecretPlain = ConvertFrom-SecureString -SecureString $ClientSecret -AsPlainText
+        $clientSecretPlain = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto(
+            [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($ClientSecret)
+        )
         $Body = @{
             grant_type    = "client_credentials"
             scope         = $GraphScope
@@ -122,7 +126,9 @@ function Get-ADAuthToken {
         }
 
         # WinRMセッション作成
-        $session = New-WinRMSession -Credential $Credential -SessionOptions $SessionOptions
+        Write-Log -Message "WinRMセッション作成開始: サーバー[vmsv3001.mirai.local]" -Level "Debug" -LogDirectory $global:Config.LogPath
+        $session = New-WinRMSession -Credential $Credential -SessionOptions $SessionOptions -Server "vmsv3001.mirai.local"
+        Write-Log -Message "WinRMセッション作成成功: セッションID[$($session.Id)]" -Level "Debug" -LogDirectory $global:Config.LogPath
         
         # セッションを利用した認証チェック
         Invoke-Command -Session $session -ScriptBlock {
@@ -147,7 +153,10 @@ function New-WinRMSession {
         [pscredential]$Credential,
         
         [Parameter(Mandatory=$true)]
-        [WinRMSessionOptions]$SessionOptions
+        [WinRMSessionOptions]$SessionOptions,
+        
+        [Parameter(Mandatory=$false)]
+        [string]$Server
     )
     
     $sessionParams = @{
@@ -159,6 +168,11 @@ function New-WinRMSession {
         SessionOption = New-WSManSessionOption -SkipCACheck:$SessionOptions.SkipCACheck `
                                               -SkipCNCheck:$SessionOptions.SkipCNCheck `
                                               -SkipRevocationCheck:$SessionOptions.SkipRevocationCheck
+    }
+
+    # サーバー指定がある場合は追加
+    if (-not [string]::IsNullOrEmpty($Server)) {
+        $sessionParams['ComputerName'] = $Server
     }
 
     try {

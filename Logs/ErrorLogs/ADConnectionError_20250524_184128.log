@@ -1,0 +1,9 @@
+﻿Error Time: 2025-05-24 18:41:30
+Error Message: AD接続に失敗しました。詳細はログを確認してください: E:\MicrosoftAutoMationManagementTools\Logs\ErrorLogs\ADConnectionError_20250524_184128.log
+Stack Trace:
+at Connect-ADAdmin, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 107
+at Invoke-CliMenu, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 243
+at <ScriptBlock>, E:\MicrosoftAutoMationManagementTools\MainCliMenu.ps1: line 476
+at <ScriptBlock>, <No file>: line 1
+Target Site: 
+Error Details: System.Management.Automation.RuntimeException: AD接続に失敗しました。詳細はログを確認してください: E:\MicrosoftAutoMationManagementTools\Logs\ErrorLogs\ADConnectionError_20250524_184128.log
